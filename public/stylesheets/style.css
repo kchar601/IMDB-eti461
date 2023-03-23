@@ -1,11 +1,24 @@
 body {
+  margin: 0;
+  padding: 0;
+  border: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
-
 .img-fluid{
   padding-right: 15px !important;
+}
+.container, .row{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+input:focus{
+  outline: none;
+}
+input{
+  padding-right: 0;
 }
