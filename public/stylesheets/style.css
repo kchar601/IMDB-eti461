@@ -16,3 +16,6 @@ a {
 input:focus{
   outline: none;
 }
+input{
+  padding-right: 0;
+}

@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMBd - Movies and More</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ea918388ae.js" crossorigin="anonymous"></script>
     <link href="./stylesheets/style.css" type="stylesheet">
+    <script src="./javascripts/index.js"></script>
 </head>
     <!--
         Landing Page
@@ -25,18 +26,18 @@
     -->
 <body>
     <div id="nav-bar" class="container-fluid g-0 bg-dark">
-        <div class="row justify-content-start g-0 border border-dark pt-3 pb-1">
-            <div class="col-1 text-end"><button id="mov-Btn" class="btn btn-dark border border-light nav-btn dropdown">Movies</button></div>
-            <div class="col-1 text-center"><button id="act-Btn" class="btn btn-dark border border-light nav-btn dropdown">Actors</button></div>
-            <div class="col-1 text-start"><button id="dir-Btn" class="btn btn-dark border border-light nav-btn dropdown">Directors</button></div>
+        <div class="row justify-content-start g-0 border border-dark pt-3 pb-1 ps-2 pe-2">
+            <div class="col-1 text-end d-grid"><button id="mov-Btn" class="btn btn-dark input-block-level border border-light nav-btn dropdown">Movies</button></div>
+            <div class="col-1 text-center d-grid"><button id="act-Btn" class="btn btn-dark border border-light nav-btn dropdown">Actors</button></div>
+            <div class="col-1 text-start d-grid"><button id="dir-Btn" class="btn btn-dark border border-light nav-btn dropdown">Directors</button></div>
             <div class="col-6 text-center text-light">Logo Here</div>
-            <div class="col-2 search-container">
+            <div class="col-2 search-container" style="height:1.5rem;">
                 <form action="./searchResults.html">
-                <input type="text" placeholder="Search movies, actors, ..." name="search" class="mt-1">
-                <button type="submit" class="btn btn-dark t-0 mb-1"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" placeholder="Search movies, actors, .." name="search" class="">
+                <button type="submit" class="btn btn-dark" style="height:1.8rem"><i class="fas fa-solid fa-magnifying-glass fa-sm"></i></button>
                 </form>
             </div>
-            <div class="col-1 text-start ps-3"><button id="log-Btn" class="btn btn-dark border border-light nav-btn dropdown">Login</button></div>
+            <div class="col-1 text-start d-grid"><button id="log-Btn" class="btn btn-dark border border-light nav-btn dropdown">Login</button></div>
         </div>
     </div>
     <div id="billboard"> Billboard
