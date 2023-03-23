@@ -8,6 +8,9 @@ body {
 a {
   color: #00B7FF;
 }
+.img-fluid{
+  padding-right: 15px !important;
+}
 .container, .row{
   margin: 0;
   padding: 0;
