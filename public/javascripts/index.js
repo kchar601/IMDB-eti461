@@ -1,12 +1,14 @@
 function loadData(db){
     $('#billboard').empty();
-    const billboard = db.findAll({billboard:1});
-    console.log(billboard.title);
+    const billboardPics = [];
     for (let i = 0; i<db.length; i++){
         const oneLine = db[i];
-        const span = $("<span></span>").append("Title: " + oneLine.title + "<br>");
-        $('#billboard').append(span);
+        if(oneLine.billboard==1){
+            billboardPics.append(oneLine.poster);
+            console.log(oneLine.title);
+        }
     }
+    $('#billboard').append("<image src=\"" + oneLine.poster + "\">");
 }
 
 var myIndex = 0;
