@@ -2,6 +2,7 @@ const express = require('express');
 const { fstat } = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv').config();
 const app = express()
 const port = 80
 app.use(express.static('public'))
@@ -9,8 +10,9 @@ app.use(express.static('public'))
 app.get('/getDB', function(req,res){
  res.setHeader('Content-Type', 'application/json');
 const { MongoClient, ServerApiVersion } = require("mongodb");
+console.log(process.env);
 // Replace the placeholder with your Atlas connection string
-const uri = "mongodb+srv://admin:6QyiaAdKZRKfBhBu@imbd.jzxx6gl.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.uri;
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri,  {
         serverApi: {
