@@ -17,28 +17,26 @@
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="padding-top:5px; border-radius: 0; margin-bottom:0px;">
-            <div class="container-fluid">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="padding-top:5px; border-radius: 0; margin-bottom:0px; position:sticky; top:0;">
+        <div class="container-fluid">
               <a class="navbar-brand" href="javascript:void(0)">
-                <img src="./images/IMDBLogo.png" alt="logo" width=75px style="margin-left: 10px;">
+                <img src="./images/IMDBLogo.png" alt="logo" width=75px style="margin-left: 10px;" onclick="window.location = 'index.html'">
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="navbar-nav me-auto" style="font-size: 1.5em !important; padding: 5px !important;"> 
-
-
+                <ul class="navbar-nav me-auto" style="font-size: 1.5em !important; padding: 5px !important;">
                   <li class="nav-item">
-                    <a class="nav-link nav-link-Head" href="javascript:void(0)">Movies</a>
+                    <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Movies</a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link nav-link-Head" href="javascript:void(0)">Actors</a>
+                    <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Actors</a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link nav-link-Head" href="javascript:void(0)">Directors</a>
+                    <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Directors</a>
                   </li>
                 </ul>
                 <form class="d-flex" style="padding-left:20px;">
@@ -53,7 +51,7 @@
 
     <body>
     <!-- Carousel -->
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 74px;">
         <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -87,27 +85,39 @@
         </a>
       </div>
 
-    <div id="trending" class="container bg-light trending-header">
+    <div id="trending" class="container bg-light border border-dark trending-header d-flex flex-column">
       <h1>Trending Movies</h1>
-      <div class="trending d-flex">
-        <img id="trend1img" style="float: left;">
-        <h2 id="trend1head" class="border border-dark"></h2>
-        <p id="trend1desc"></p>
-      </div>
-      <!-- Movie 1-->
-      <div class="trending d-flex">
-        <img id="trend2"style="float: left;">
-      </div>
-      <!-- Movie 2-->
-      <div class="trending d-flex">
-        <img id="trend3"style="float: left;">
-      </div>
-      <!-- Movie 3-->
+      <ol>
+        <li class="trending">
+          <button class="li-btn">
+          <img id="trend1img" style="float: left;">
+          <h2 id="trend1head"></h2>
+          <p id="trend1desc"></p>
+          </button>
+        </li>
+        <!-- Movie 1-->
+        <li class="trending">
+          <button class="li-btn">
+          <img id="trend2img" style="float: left;">
+          <h2 id="trend2head"></h2>
+          <p id="trend2desc"></p>
+          </button>
+        </li>
+        <!-- Movie 2-->
+        <li class="trending">
+          <button class="li-btn">
+          <img id="trend3img" style="float: left;">
+          <h2 id="trend3head"></h2>
+          <p id="trend3desc"></p>
+          </button>
+        </li>
+        <!-- Movie 3-->
+      </ol>
     </div>
     </body>
 
 <!--Footer Starts Here-->
-<div class="container">
+<div class="container" style="padding-top: 30px;">
   <footer class="py-5">
     <div class="row">
       <div class="col-6 col-md-2 mb-3">

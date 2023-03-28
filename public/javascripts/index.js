@@ -1,13 +1,20 @@
 function loadData(db){
     for (let i = 0; i<db.length; i++){
         const oneLine = db[i];
-        if(oneLine.id=="3"){
-            $('#trend1img').attr('src', oneLine.poster);
-            $('#trend1head').text(oneLine.title);
-            $('#trend1desc').text(oneLine.desc);
-        }
+        checkLine(oneLine, 1);
+        checkLine(oneLine, 2);
+        checkLine(oneLine, 3);
     }
 }
+function checkLine(line, id){
+    if(line.id==id){
+        $('#trend'+ id +'img').attr('src', line.poster);
+        $('#trend'+ id + 'head').text(line.title);
+        $('#trend' + id + 'desc').text(line.desc);
+    }
+    return false;
+}
+
 function printDB(db){
     for (let i = 0; i<db.length; i++){
         console.log(db[i].title);
