@@ -2,8 +2,9 @@ function loadData(db){
     for (let i = 0; i<db.length; i++){
         const oneLine = db[i];
         if(oneLine.id=="3"){
-            $('#trend1').attr('src', oneLine.img);
-            console.log(oneLine.title);
+            $('#trend1img').attr('src', oneLine.poster);
+            $('#trend1head').text(oneLine.title);
+            $('#trend1desc').text(oneLine.desc);
         }
     }
 }
