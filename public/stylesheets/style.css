@@ -1,20 +1,62 @@
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+h5 {
+  font-size: medium;
 }
-.img-fluid{
-  padding-right: 15px !important;
+li{
+  font-size: small;
 }
-.container, .row{
-  margin: 0;
-  padding: 0;
-  border: 0;
+form > p {
+  font-size: small;
 }
-input:focus{
-  outline: none;
+input::placeholder{
+  font-size:small;
 }
-input{
-  padding-right: 0;
+.nav-link-Head{
+  font-size: 2rem;
+}
+li.nav-item{
+margin-right: 1rem;
+}
+.login-btn{
+  margin-left: 15px; 
+  color: #212529; 
+  background-color: white; 
+  border-radius: 5px; 
+  font-size: medium;
+}
+.btn-small{
+  font-size: medium;
+}
+
+.trending-header{
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px; 
+}
+
+.trending-header h1{
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+footer > div > div > ul > li > a{
+  font-size: small;
+}
+
+/*login page*/
+
+
+.loginH1{
+  font-size: 3em;
+  padding-bottom: 0em;
+  font-weight: 700;
+}
+
+.loginHeader{
+  padding-top: 1em;
+  font-size: 2.3em;
+  font-weight: 700;
+}
+
+.loginText{
+  font-size: 1.5em;
 }
