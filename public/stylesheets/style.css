@@ -4,10 +4,6 @@ body {
   border: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
-a {
-  color: #00B7FF;
-}
 .img-fluid{
   padding-right: 15px !important;
 }
