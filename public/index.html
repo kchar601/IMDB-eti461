@@ -6,14 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMBd - Movies and More</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/ea918388ae.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="./stylesheets/style.css" type="stylesheet">
     <script src="./javascripts/index.js"></script>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="padding-bottom:5px;">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="javascript:void(0)">
+                <img src="./images/IMDBLogo.png" alt="logo" width=75px>
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto" style="font-size: 1.5em !important; padding: 5px !important;"> 
 
+<<<<<<< Updated upstream
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="javascript:void(0)">
@@ -41,52 +56,122 @@
     </div>
   </div>
 </nav> 
+=======
+                  <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Movies</a>
+                  </li>
+>>>>>>> Stashed changes
 
-<body>
-  <div id="header"></div>
-  
-  <!--
-        Landing Page
-            Movies -> Highly Recommended, New Releases, Genres 
-            Actors -> Awards, Alphabetical,
-            Directors -> Awards, Alphabetical,
-            Logo
-            Search Bar -> Movies, Actors, or Directors
-            Login -> Admin
-        Slideshow / Billboard
-        (5?) New Releases
-        Footer
-    -->
-<body>
-    <div id="billboard" class="carousel slide" data-bs-ride="true">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Actors</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Directors</a>
+                  </li>
+                </ul>
+                <form class="d-flex" style="padding-left:20px;">
+                  <input class="form-control me-2" type="text" placeholder="Search">
+                  <button class="btn btn-primary" type="button">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav> 
+    </header>
+
+    <body>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+    
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <img src="./images/Avatar.png" alt="Los Angeles" style="width:100%;">
+          </div>
+    
+          <div class="item">
+            <img src="./images/interstellar.png" alt="Chicago" style="width:100%;">
+          </div>
+        
+          <div class="item">
+            <img src="./images/WoWS.png" alt="New york" style="width:100%;">
+          </div>
         </div>
-        <div id="carousel-inner" class="carousel-inner">
-          <div id="carousel0" class="carousel-item active">
-            <img src="./images/IMDBLogo.png" class="d-block" alt="..." style="height:200px;">
+    
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+
+    </body>
+
+<!--Footer Starts Here-->
+<div class="container">
+  <footer class="py-5">
+    <div class="row">
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Page Directory</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Movies</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Actors</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Directors</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Search</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h5>About Us</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About Us</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Meet the Team</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About the Project</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">View Source Code</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Contact the Dev Team</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Admin</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Admin Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Login</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-5 offset-md-1 mb-3">
+        <form>
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of what's new and exciting from IMDB.</p>
+          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+            <button class="btn btn-primary" type="button">Subscribe</button>
           </div>
-          <div id="carousel1" class="carousel-item">
-            <img src="./images/IMDBLogo.png" class="d-block" alt="..." style="height:200px;">
-          </div>
-          <div id="carousel2" class="carousel-item">
-            <img src="./images/IMDBLogo.png" class="d-block" alt="..." style="height:200px;">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+        </form>
+      </div>
     </div>
-    <div id="new-Releases"> New Releases
+
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>Made by Will, Keith and Justis. ETI 461 - The Pennsylvania State University.</p>
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+      </ul>
     </div>
-    <div id="footer" class="container-fluid border border-dark"> Footer
-    </div>
-</body>
+  </footer>
+</div>
 </html>
