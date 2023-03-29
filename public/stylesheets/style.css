@@ -28,12 +28,13 @@ margin-right: 1rem;
   color: #212529; 
   background-color: white; 
   border-radius: 5px; 
+}
+.btn-medium{
   font-size: medium;
 }
 .btn-small{
-  font-size: medium;
+  font-size: small;
 }
-
 ol{
   align-items: center;
 }
@@ -76,7 +77,7 @@ li.trending::marker{
   border: none;
   padding-bottom: 20px;
 }
-.li-btn:not(:last-child){
+:not(:last-child) > .li-btn{
   border-bottom: black 2px solid;
 }
 
@@ -95,6 +96,14 @@ li.trending::marker{
 
 footer > div > div > ul > li > a{
   font-size: small;
+}
+
+
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 /*login page*/

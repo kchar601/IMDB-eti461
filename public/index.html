@@ -42,8 +42,8 @@
                 <form class="d-flex" style="padding-left:20px;">
                   <input class="form-control me-2" type="text" placeholder="Search" style="padding-right: 50px;">
                 </form>
-                <button class="btn btn-primary btn-small" type="button">Search</button>
-                <button class="btn btn-primary login-btn" type="button" onclick="window.location = 'login.html'">Login</button>
+                <button class="btn btn-primary btn-medium" type="button">Search</button>
+                <button class="btn btn-primary btn-medium login-btn" type="button" onclick="window.location = 'login.html'">Login</button>
               </div>
             </div>
           </nav> 
@@ -89,26 +89,32 @@
       <h1>Trending Movies</h1>
       <ol>
         <li class="trending">
-          <button class="li-btn">
+          <button id="trend1btn" class="li-btn">
           <img id="trend1img" style="float: left;">
           <h2 id="trend1head"></h2>
           <p id="trend1desc"></p>
+          <p id="trend1dir"></p>
+          <p id="trend1act"></p>
           </button>
         </li>
         <!-- Movie 1-->
         <li class="trending">
-          <button class="li-btn">
+          <button id="trend2btn" class="li-btn">
           <img id="trend2img" style="float: left;">
           <h2 id="trend2head"></h2>
           <p id="trend2desc"></p>
+          <p id="trend2dir"></p>
+          <p id="trend2act"></p>
           </button>
         </li>
         <!-- Movie 2-->
         <li class="trending">
-          <button class="li-btn">
+          <button id="trend3btn" class="li-btn">
           <img id="trend3img" style="float: left;">
           <h2 id="trend3head"></h2>
           <p id="trend3desc"></p>
+          <p id="trend3dir"></p>
+          <p id="trend3act"></p>
           </button>
         </li>
         <!-- Movie 3-->
@@ -121,7 +127,7 @@
   <footer class="py-5">
     <div class="row">
       <div class="col-6 col-md-2 mb-3">
-        <h5>Page Directory</h5>
+        <h5 class="prevent-select">Page Directory</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Movies</a></li>
@@ -132,7 +138,7 @@
       </div>
 
       <div class="col-6 col-md-2 mb-3">
-        <h5>About Us</h5>
+        <h5 class="prevent-select">About Us</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About Us</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Meet the Team</a></li>
@@ -143,7 +149,7 @@
       </div>
 
       <div class="col-6 col-md-2 mb-3">
-        <h5>Admin</h5>
+        <h5 class="prevent-select">Admin</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Admin Home</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Login</a></li>
@@ -152,19 +158,19 @@
 
       <div class="col-md-5 offset-md-1 mb-3">
         <form>
-          <h5>Subscribe to our newsletter</h5>
-          <p>Monthly digest of what's new and exciting from IMDB.</p>
+          <h5 class="prevent-select">Subscribe to our newsletter</h5>
+          <p class="prevent-select">Monthly digest of what's new and exciting from IMDB.</p>
           <div class="d-flex flex-column flex-sm-row w-100 gap-2">
             <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-            <button class="btn btn-primary" type="button">Subscribe</button>
+            <input id="newsletter1" type="text" class="form-control" placeholder="Email address"></input>
+            <button class="btn btn-primary btn-small" type="button">Subscribe</button>
           </div>
         </form>
       </div>
     </div>
 
     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <p>Made by Will, Keith and Justis. ETI 461 - The Pennsylvania State University.</p>
+      <p class="prevent-select">Made by Will, Keith and Justis. ETI 461 - The Pennsylvania State University.</p>
       <ul class="list-unstyled d-flex">
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
