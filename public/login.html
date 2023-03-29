@@ -19,38 +19,37 @@
 <body>
 
   <header>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="padding-top:5px; border-radius: 0; margin-bottom:0px;">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="javascript:void(0)">
-            <img src="./images/IMDBLogo.png" alt="logo" width=75px onclick="window.location = 'index.html'">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav me-auto" style="font-size: 1.5em !important; padding: 5px !important;"> 
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="padding-top:5px; border-radius: 0; margin-bottom:0px; position:sticky; top:0;">
+      <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:void(0)">
+              <img src="./images/IMDBLogo.png" alt="logo" width=75px style="margin-left: 10px;" onclick="window.location = 'index.html'">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+              <ul class="navbar-nav me-auto" style="font-size: 1.5em !important; padding: 5px !important;">
+                <li class="nav-item">
+                  <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Movies</a>
+                </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Movies</a>
-              </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Actors</a>
+                </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Actors</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Directors</a>
-              </li>
-            </ul>
-            <form class="d-flex" style="padding-left:20px;">
-              <input class="form-control me-2" type="text" placeholder="Search">
-              <button class="btn btn-primary" type="button">Search</button>
-            </form>
-            <button class="btn" type="button" style="margin-left: 15px; color: #212529; background-color: white; border-radius: 5px; font-size: small;" onclick="window.location = 'login.html'">Login</button>
+                <li class="nav-item">
+                  <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Directors</a>
+                </li>
+              </ul>
+              <form class="d-flex" style="padding-left:20px;">
+                <input class="form-control me-2" type="text" placeholder="Search" style="padding-right: 50px;">
+              </form>
+              <button class="btn btn-primary btn-medium" type="button">Search</button>
+              <button class="btn btn-primary btn-medium login-btn" type="button" onclick="window.location = 'login.html'">Login</button>
+            </div>
           </div>
-        </div>
-      </nav> 
-</header>
+        </nav> 
+  </header>
 
   <div class="container mt-3" style="background-color:black; margin-top:0px !important; padding-top: 2em !important; color:white;">
     <div class="loginH1" style="padding-left: 10px; color: #e7c947">Sign in to IMDB</div>
