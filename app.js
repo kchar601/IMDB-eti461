@@ -1,9 +1,6 @@
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const bcrypt = require('bcrypt');
 const express = require('express');
 const { fstat } = require('fs');
+const bcrypt = require("bcryptjs");
 const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
@@ -30,7 +27,7 @@ async function run() {
     await dbo.command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
     const items = await dbo.collection("movies").find({}).toArray();
-    console.log(JSON.stringify(items));
+    //console.log(JSON.stringify(items));
     res.json(items);
   } finally {
     await client.close();
@@ -101,73 +98,72 @@ app.listen(port, () => {
 
 })
 
-/* This is what ChatGPT spit out for the sessions using mongoDb, node and express. We just have to connect the database
+app.post('/checkLogin', function(req, res){
 
-
-// connect to mongo database
-mongoose.connect('mongodb://localhost/myapp', { useNewUrlParser: true, useUnifiedTopology: true });
-
-// create user schema and model
-const userSchema = new mongoose.Schema({
-  email: String,
-  password: String
-});
-
-const User = mongoose.model('User', userSchema);
-
-// create express app
-const app = express();
-
-// set up middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// set up session
-app.use(session({
-  secret: 'myappsecret',
-  resave: false,
-  saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  cookie: { maxAge: 3600000 } // 1 hour
-}));
-
-// handle login request
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  // check if user exists in database
-  const user = await User.findOne({ email });
-  if (!user) {
-    res.status(401).send('Invalid email or password');
-    return;
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require("mongodb");
+  const uri = process.env.uri;
+  const client = new MongoClient(uri,  {
+          serverApi: {
+              version: ServerApiVersion.v1,
+              strict: true,
+              deprecationErrors: true,
+          }
+      }
+  );
+ 
+  async function run() {
+    try {
+      await client.connect();
+      const dbo = client.db("Users");
+      await dbo.command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+      const items = await dbo.collection("users").findOne({username: req.body.username}).toArray();
+      console.log(JSON.stringify(items));
+      const result = res.json(items);
+    } finally {
+      await client.close();
+    }
   }
+  run().catch(console.dir);
 
-  // check if password is correct
-  const passwordMatch = await bcrypt.compare(password, user.password);
-  if (!passwordMatch) {
-    res.status(401).send('Invalid email or password');
-    return;
+  const saltRounds = 5;
+  bcrypt.genSalt(saltRounds, function (saltError, salt) {
+    if (saltError) {
+      throw saltError
+    } else {
+      bcrypt.hash(req.body.password, salt, function(hashError, hash) {
+        if (hashError) {
+          throw hashError
+        } else {
+          if(hash == result.password){
+            console.log("passwords match");
+            return true;
+          }
+          else{
+            return false;
+          }
+        }
+      })
+    }
+  })
+})
+
+
+
+const password = "Eti461!";
+const saltRounds = 5;
+
+bcrypt.genSalt(saltRounds, function (saltError, salt) {
+  if (saltError) {
+    throw saltError
+  } else {
+    bcrypt.hash(password, salt, function(hashError, hash) {
+      if (hashError) {
+        throw hashError
+      } else {
+        console.log(hash);
+      }
+    })
   }
-
-  // start session
-  req.session.user = user;
-  res.cookie('myappsession', req.session.id, { maxAge: 3600000 }); // set session id as cookie
-
-  res.send('Logged in');
-});
-
-// handle logout request
-app.post('/logout', (req, res) => {
-  req.session.destroy();
-  res.clearCookie('myappsession');
-  res.send('Logged out');
-});
-
-// start server
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
-});
-
-
-
-
-*/
+})

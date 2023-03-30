@@ -127,11 +127,12 @@ footer > div > div > ul > li > a{
 a.menuTab{
   border: 2px solid #212529;
 }
-a.menuTab:hover{
-  border: 2px solid white;
-  /*border-radius: 4px !important;
-  border-width: 3px !important;
-*/
+a.text-muted{
+  transition: 0.15s !important;
+}
+a.text-muted:hover{
+  background-color: transparent !important;
+  color: white !important;
 }
 .nav-link-Head{
   font-size: 2rem;
@@ -214,7 +215,9 @@ footer > div > div > ul > li > a{
   font-size: small;
 }
 
-
+.top-border-grey{
+  border-top: 1px solid #212529;
+}
 
 .prevent-select {
   -webkit-user-select: none; /* Safari */
@@ -267,4 +270,29 @@ a.menuTab:hover{
   color: #000000;
   border: none;
   text-decoration-line: none;
+}
+
+/*Animations*/
+
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #f8c400;
+  transform-origin: bottom right;
+  transition: transform 0.5s ease-out;
+  }
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }

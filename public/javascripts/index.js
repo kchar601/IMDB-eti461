@@ -67,3 +67,4 @@ $(document).ready(function getInfo() {
       .then(() => $.get("/getDirectors", loadDirectors)
       .then(() => $.get("/getActors", loadActors)));
   });
+
