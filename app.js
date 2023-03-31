@@ -4,9 +4,12 @@ const bcrypt = require("bcryptjs");
 const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+const bodyParser = require('body-parser');
 const app = express()
 const port = 80
 app.use(express.static('public'))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/getMovies', function(req,res){
  res.setHeader('Content-Type', 'application/json');
@@ -99,7 +102,6 @@ app.listen(port, () => {
 })
 
 app.post('/checkLogin', function(req, res){
-
   res.setHeader('Content-Type', 'application/json');
   const { MongoClient, ServerApiVersion } = require("mongodb");
   const uri = process.env.uri;
@@ -111,59 +113,40 @@ app.post('/checkLogin', function(req, res){
           }
       }
   );
- 
+  var user = {username: req.body.username};
+  var pswd = {password: req.body.password};
+  console.log(user);
+  console.log(pswd);
+
+  
   async function run() {
     try {
       await client.connect();
       const dbo = client.db("Users");
       await dbo.command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-      const items = await dbo.collection("users").findOne({username: req.body.username}).toArray();
-      console.log(JSON.stringify(items));
-      const result = res.json(items);
+      
+      const result = await dbo.collection("users").findOne(user);
+      if (result) {
+        console.log(result);
+        const passwordMatch = await bcrypt.compare(req.body.password, result.password);
+        if (passwordMatch) {
+          console.log("passwords match");
+          res.json([true, "user=" + result.username + "&pass=" + result.password]);
+        } else {
+          console.log("passwords don't match");
+          res.json([false]);
+        }
+      } else {
+        console.log("user not found");
+        res.json([false]);
+      };
+    } catch (err) {
+      console.error(err);
     } finally {
       await client.close();
     }
   }
   run().catch(console.dir);
-
-  const saltRounds = 5;
-  bcrypt.genSalt(saltRounds, function (saltError, salt) {
-    if (saltError) {
-      throw saltError
-    } else {
-      bcrypt.hash(req.body.password, salt, function(hashError, hash) {
-        if (hashError) {
-          throw hashError
-        } else {
-          if(hash == result.password){
-            console.log("passwords match");
-            return true;
-          }
-          else{
-            return false;
-          }
-        }
-      })
-    }
-  })
 })
 
-
-
-const password = "Eti461!";
-const saltRounds = 5;
-
-bcrypt.genSalt(saltRounds, function (saltError, salt) {
-  if (saltError) {
-    throw saltError
-  } else {
-    bcrypt.hash(password, salt, function(hashError, hash) {
-      if (hashError) {
-        throw hashError
-      } else {
-        console.log(hash);
-      }
-    })
-  }
-})

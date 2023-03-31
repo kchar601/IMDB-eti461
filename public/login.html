@@ -55,22 +55,20 @@
     <div class="loginH1" style="padding-left: 10px; color: #e7c947">Sign in to IMDB</div>
     <div class="row">
       <div class="col-sm-4 p-3 text-white loginText" style="padding-left: 2em !important; padding-right: 2em !important;">
-        <form onsubmit="return check_user()">
           <div class="mb-3 mt-3">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            <label for="username">Username:</label>
+            <input class="form-control" id="username" placeholder="Enter username" name="username">
           </div>
           <div class="mb-3">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+            <label for="pswd">Password:</label>
+            <input type="password" class="form-control" id="pswd" placeholder="Enter password" name="pswd">
           </div><br><br>
           <div class="form-check mb-3">
             <label class="form-check-label">
               <input class="form-check-input" type="checkbox" name="remember"> Remember me
             </label>
           </div>
-          <button type="submit" class="btn btn-primary" style="font-size: 1em;">Submit</button>
-        </form>
+          <button type="submit" class="btn btn-primary" style="font-size: 1em;" onclick="return check_user()">Submit</button>
       </div>
       <div class="col-sm-8 p-3 bg-dark text-white" style="padding: 3em !important;">
 
