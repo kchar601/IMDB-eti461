@@ -62,6 +62,19 @@ function hasNumber(myString) {
     return /\d/.test(myString);
   }
 
+function checkForCookie(){
+    var cookie = decodeURIComponent(document.cookie);
+    if(cookie != ""){
+        console.log(cookie);
+        window.location.href = "user.html?" + cookie;
+    }
+    else{
+        console.log("no cookie");
+        window.location.href = "login.html";
+    }
+}
+
+
 $(document).ready(function getInfo() {
     $.get("/getMovies", loadMovies)
       .then(() => $.get("/getDirectors", loadDirectors)

@@ -5,6 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
+var cookie = require('cookie');
 const app = express()
 const port = 80
 app.use(express.static('public'))
@@ -114,9 +115,9 @@ app.post('/checkLogin', function(req, res){
       }
   );
   var user = {username: req.body.username};
-  var pswd = {password: req.body.password};
-  console.log(user);
-  console.log(pswd);
+  //var pswd = {password: req.body.password};
+  //console.log(user);
+  //console.log(pswd);
 
   
   async function run() {
@@ -132,6 +133,16 @@ app.post('/checkLogin', function(req, res){
         const passwordMatch = await bcrypt.compare(req.body.password, result.password);
         if (passwordMatch) {
           console.log("passwords match");
+          res.cookie("user", result.username,           
+          { 
+            maxAge: 1000*60*60*24, //one day
+            //httpOnly: true 
+          });
+          res.cookie("pass", result.password,
+          { 
+            maxAge: 1000*60*60*24, //one day
+            //httpOnly: true 
+          });
           res.json([true, "user=" + result.username + "&pass=" + result.password]);
         } else {
           console.log("passwords don't match");
