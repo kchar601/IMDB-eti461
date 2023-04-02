@@ -3,221 +3,148 @@
   top: 0;
   z-index: 1000;
   width: 100%;
-}
-
-h5 {
+  }
+  
+  h5 {
   font-size: medium;
-}
-li{
+  }
+  
+  li, form > p, input::placeholder, .nav-link-Head {
   font-size: small;
-}
-form > p {
-  font-size: small;
-}
-input::placeholder{
-  font-size:small;
-}
-.nav-link-Head{
-  font-size: 2rem;
-}
-li.nav-item{
-margin-right: 1rem;
-}
-.login-btn{
-  margin-left: 15px; 
-  color: #212529; 
-  background-color: white; 
-  border-radius: 5px; 
-}
-.btn-medium{
+  }
+  
+  li.nav-item {
+  margin-right: 1rem;
+  }
+  
+  .login-btn {
+  margin-left: 15px;
+  color: #212529;
+  background-color: white;
+  border-radius: 5px;
+  }
+  
+  .btn-medium {
   font-size: medium;
-}
-.btn-small{
+  }
+  
+  .btn-small {
   font-size: small;
-}
-ol{
+  }
+  
+  ol {
   align-items: center;
-}
-
-.trending{
+  }
+  
+  .trending {
   margin-left: 50px;
-}
-
-.trending > p{
-  display:block;
-}
-
-.trending-header{
+  }
+  
+  .trending-header {
   margin-top: 50px;
   padding-top: 20px;
-  padding-bottom: 20px; 
-}
-
-li.trending::marker{
+  padding-bottom: 20px;
+  }
+  
+  li.trending::marker, .trending-header h1 {
   font-size: 4rem;
   font-weight: 700;
-}
-
-.trending-header h1{
-  font-size: 4rem;
-  font-weight: 700;
-  padding-bottom: 2rem;
-}
-
-.trending > button h2{
+  }
+  
+  .trending > button h2 {
   font-size: 3rem;
   height: fit-content;
   width: 100%;
   padding-left: 25rem;
   text-align: left;
-}
-
-.li-btn{
+  }
+  
+  .li-btn {
   background-color: transparent;
   border: none;
   padding-bottom: 20px;
-}
-:not(:last-child) > .li-btn{
+  }
+  
+  :not(:last-child) > .li-btn {
   border-bottom: black 2px solid;
-}
-
-.trending > button img{
+  }
+  
+  .trending > button img {
   height: 300px;
   margin-left: 30px;
-}
-
-.trending > button p{
+  }
+  
+  .trending > button p {
   font-size: 2rem;
   height: fit-content;
   padding-left: 25rem;
   width: 70vw;
   text-align: left;
-}
-
-footer > div > div > ul > li > a{
+  }
+  
+  footer > div > div > ul > li > a, a.text-muted {
   font-size: small;
-}
-
-
-
-.prevent-select {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-}
-
-/*login page*/
-
-
-.loginH1{
-  font-size: 3em;
+  }
+  
+  .prevent-select {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  }
+  
+  .loginH1 {
+  font-size: 2em;
   padding-bottom: 0em;
   font-weight: 700;
-}
-
-.loginHeader{
+  }
+  
+  .loginHeader {
   padding-top: 1em;
   font-size: 2.3em;
   font-weight: 700;
-}
+  }
+  
+  .loginText {
+  font-size: 1.2em;
+  }
 
-.loginText{
-  font-size: 1.5em;
-}
-a.menuTab{
-  border: 2px solid #212529;
-}
-a.text-muted{
-  transition: 0.15s !important;
-}
-a.text-muted:hover{
-  background-color: transparent !important;
-  color: white !important;
-}
-.nav-link-Head{
-  font-size: 2rem;
-}
-li.nav-item{
-margin-right: 1rem;
-}
-.login-btn{
-  margin-left: 15px; 
-  color: #212529; 
-  background-color: white; 
-  border-radius: 5px; 
-}
-.btn-medium{
-  font-size: medium;
-}
-.btn-small{
-  font-size: small;
-}
-ol{
-  align-items: center;
-}
+  label.signupText{
+    font-size: 2em;
+  }
+  input.signupText{
+    font-size: 1.5em;
+  }
+  div.signupText{
+    font-size: 1.5em;
+  }
 
-.trending{
-  margin-left: 50px;
-}
+  h6{
+    font-size: 1.4em;
+  }
 
-.trending > p{
-  display:block;
-}
-
-.trending-header{
-  margin-top: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px; 
-}
-
-li.trending::marker{
-  font-size: 4rem;
+  a.menuTab {
   font-weight: 700;
-}
-
-.trending-header h1{
-  font-size: 4rem;
-  font-weight: 700;
-  padding-bottom: 2rem;
-}
-
-.trending > button h2{
-  font-size: 3rem;
-  height: fit-content;
-  width: 100%;
-  padding-left: 25rem;
-  text-align: left;
-}
-
-.li-btn{
-  background-color: transparent;
+  font-size: 22px;
+  color: #fff;
+  background-color: #e8c44600;
+  padding: 10px 30px;
   border: none;
-  padding-bottom: 20px;
-}
-:not(:last-child) > .li-btn{
-  border-bottom: black 2px solid;
-}
-
-.trending > button img{
-  height: 300px;
-  margin-left: 30px;
-}
-
-.trending > button p{
-  font-size: 2rem;
-  height: fit-content;
-  padding-left: 25rem;
-  width: 70vw;
-  text-align: left;
-}
-
-footer > div > div > ul > li > a{
-  font-size: small;
-}
-
-.top-border-grey{
+  border-radius: 5px;
+  transition: 417ms;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  }
+  
+  .top-border-grey {
   border-top: 1px solid #212529;
-}
+  }
+
+  .top-border-white {
+    border-top: 1px solid white;
+  }
 
 .prevent-select {
   -webkit-user-select: none; /* Safari */
@@ -227,22 +154,6 @@ footer > div > div > ul > li > a{
 
 /*login page*/
 
-
-.loginH1{
-  font-size: 3em;
-  padding-bottom: 0em;
-  font-weight: 700;
-}
-
-.loginHeader{
-  padding-top: 1em;
-  font-size: 2.3em;
-  font-weight: 700;
-}
-
-.loginText{
-  font-size: 1.5em;
-}
 a.menuTab{
   /*font-family: Roboto Condensed; */
   font-weight: 700;
@@ -277,6 +188,7 @@ a.menuTab:hover{
 .hover-underline-animation {
   display: inline-block;
   position: relative;
+  padding-bottom: 10px;
 }
 
 .hover-underline-animation:after {

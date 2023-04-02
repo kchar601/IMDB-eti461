@@ -62,15 +62,18 @@ function hasNumber(myString) {
     return /\d/.test(myString);
   }
 
-function checkForCookie(){
-    var cookie = decodeURIComponent(document.cookie);
+  function checkForCookie(){
+    var cookie = document.cookie;
     if(cookie != ""){
         console.log(cookie);
-        window.location.href = "user.html?" + cookie;
+        $('#login-btn').html('<i class=\"fa-solid fa-user\" style=\"color: #ffffff;\"></i>');
+        $('#login-btn').attr('onclick', 'window.location = \'user.html?' + cookie + '\'');
+        $('#login-btn').css("background-color", "#0d6efd");
     }
     else{
         console.log("no cookie");
-        window.location.href = "login.html";
+        $('#login-btn').html('Login');
+        $('#login-btn').attr('onclick', 'window.location = \'login.html\'');
     }
 }
 
@@ -79,5 +82,6 @@ $(document).ready(function getInfo() {
     $.get("/getMovies", loadMovies)
       .then(() => $.get("/getDirectors", loadDirectors)
       .then(() => $.get("/getActors", loadActors)));
+      checkForCookie();
   });
 

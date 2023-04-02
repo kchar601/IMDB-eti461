@@ -20,7 +20,8 @@ function check_user(){
         else{
             console.log("user dont exist");
             alert("Username and password combination does not exist");
-
+            $('#pswd')[0].value = "";
+            $('#error').html("Username and password combination does not exist");
         };
     });
 }
@@ -29,20 +30,21 @@ function checkForCookie(){
     var cookie = document.cookie;
     if(cookie != ""){
         console.log(cookie);
-        $('#login-btn').html('<i class=\"fa-solid fa-user\" style=\"color: #ffffff;\"></i>');
-        $('#login-btn').attr('href', 'user.html?' + cookie);
-        //window.location.href = "user.html?" + cookie;
+        window.location.href = "user.html?" + cookie; //redirect bc user is already logged in and shouldn't be able to access login page
+        // $('#login-btn').html('<i class=\"fa-solid fa-user\" style=\"color: #ffffff;\"></i>');
+        // $('#login-btn').attr('onclick', 'window.location = \'user.html?' + cookie + '\'');
+        // $('#login-btn').css("background-color", "#0d6efd");
     }
     else{
         console.log("no cookie");
         $('#login-btn').html('Login');
-        window.location.href = "login.html";
+        $('#login-btn').attr('onclick', 'window.location = \'login.html\'');
     }
 }
 
 
 $(document).ready(function(){
     //check for login cookie
-    var cookie = document.cookie;
-    console.log(cookie);
+    checkForCookie();
 })
+
