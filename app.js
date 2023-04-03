@@ -12,33 +12,31 @@ app.use(express.static('public'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/getMovies', function(req,res){
- res.setHeader('Content-Type', 'application/json');
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri = process.env.uri;
-const client = new MongoClient(uri,  {
-        serverApi: {
-            version: ServerApiVersion.v1,
-            strict: true,
-            deprecationErrors: true,
-        }
-    }
-);
-async function run() {
+app.get('/getMovies', async function(req,res){
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require("mongodb");
+  const uri = process.env.uri;
+  const client = new MongoClient(uri,  {
+          serverApi: {
+              version: ServerApiVersion.v1,
+              strict: true,
+              deprecationErrors: true,
+          }
+      }
+  );
   try {
-    await client.connect();
-    const dbo = client.db("movies");
-    await dbo.command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    const items = await dbo.collection("movies").find({}).toArray();
-    //console.log(JSON.stringify(items));
-    res.json(items);
+      await client.connect();
+      const dbo = client.db("movies");
+      await dbo.command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+      const sortStyle = req.query.sort || "id";
+      const items = await dbo.collection("movies").find({}).sort(sortStyle === "rating" ? {rating: -1} : {id: 1}).toArray();
+      res.json(items);
   } finally {
-    await client.close();
+      await client.close();
   }
-}
-run().catch(console.dir);
-})
+});
+
 
 app.get('/getDirectors', function(req,res){
   res.setHeader('Content-Type', 'application/json');
@@ -115,10 +113,6 @@ app.post('/checkLogin', function(req, res){
       }
   );
   var user = {username: req.body.username};
-  //var pswd = {password: req.body.password};
-  //console.log(user);
-  //console.log(pswd);
-
   
   async function run() {
     try {
@@ -136,12 +130,10 @@ app.post('/checkLogin', function(req, res){
           res.cookie("user", result.username,           
           { 
             maxAge: 1000*60*60*24, //one day
-            //httpOnly: true 
           });
           res.cookie("pass", result.password,
           { 
             maxAge: 1000*60*60*24, //one day
-            //httpOnly: true 
           });
           res.json([true, "user=" + result.username + "&pass=" + result.password]);
         } else {
@@ -179,11 +171,6 @@ app.post('/attemptRegister', async function(req, res){
   var user = {username: req.body.username};
   var pswd = {password: req.body.password};
   var email = {email: req.body.email};
-  console.log(fName);
-  console.log(lName);
-  console.log(user);
-  console.log(pswd);
-  console.log(email);
   
   try {
     await client.connect();

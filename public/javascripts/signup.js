@@ -19,171 +19,132 @@ function clearErrors(){
 }
 
 function addErrorListener(){
-
-    //need to replace jquery selectors to appropriate ones
-    //then connect form to app.post('/signup', function(req, res){})
-
     $('#Fname').keyup(function(){
         if ($('#Fname').val().length < 1) {
-            if ($('#Fname').hasClass('border-success')) {
-                $('#Fname').removeClass('border-success');
-            }
-            $('#Fname').addClass('border-danger');
+            addDanger('#Fname');
             return false;
           } else {
-            if ($('#Fname').hasClass('border-danger')) {
-                $('#Fname').removeClass('border-danger');
-            }
-            $('#Fname').addClass('border-success');
+            addSuccess('#Fname');
           }
     });
     $('#Lname').keyup(function(){
         if ($('#Lname').val().length < 1) {
-            if ($('#Lname').hasClass('border-success')) {
-                $('#Lname').removeClass('border-success');
-            }
-            $('#Lname').addClass('border-danger');
+            addDanger('#Lname');
             return false;
           } else {
-            if ($('#Lname').hasClass('border-danger')) {
-                $('#Lname').removeClass('border-danger');
-            }
-            $('#Lname').addClass('border-success');
+            addSuccess('#Lname');
           }    });
     $('#email').keyup(function(){
         if(!($('#email').val().includes('@') && $('#email').val().includes('.'))){
-            if($('#email').hasClass('border-success')){
-                $('#email').removeClass('border-success');}
-            $('#email').addClass('border-danger');
+            addDanger('#email');
             $('#emailCheck').html('Email must be valid');
             $('#emailCheck').show();
             return false;
         }
         else{
             $('#emailCheck').hide();
-            if($('#email').hasClass('border-danger')){
-                $('#email').removeClass('border-danger');
-            }
-            $('#email').addClass('border-success');
+            addSuccess('#email');
         }
     });
     $('#username').keyup(function(){
         if ($('#username').val().length < 5) {
-            if($('#username').hasClass('border-success')){
-                $('#username').removeClass('border-success');}
-            $('#username').addClass('border-danger');
+            addDanger('#username');
             $('#userCheck').html('Username must be at least 5 characters long');
             $('#userCheck').show();
             return false;
         }
         else{
             $('#userCheck').hide();
-            if($('#username').hasClass('border-danger')){
-                $('#username').removeClass('border-danger');
-            }
-            $('#username').addClass('border-success');
+            addSuccess('#username');
         }
     });
     $('#password').keyup(function(){
         if($('#password').val().length < 8){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password must be at least 8 characters long');
             $('#passCheck').show();
             return false;
         }
         if(!hasNumber($('#password').val())){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password must contain at least one number');
             $('#passCheck').show();
             return false;
         }
         if(!hasUpper($('#password').val())){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password must contain at least one uppercase letter');
             $('#passCheck').show();
             return false;
         }
         if(!hasLower($('#password').val())){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password must contain at least one lowercase letter');
             $('#passCheck').show();
             return false;
         }
         if(!hasSpecial($('#password').val())){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password must contain at least one special character');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#username').val()){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password cannot be the same as username');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#email').val()){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password cannot be the same as email');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#Fname').val()){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password cannot be the same as first name');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#Lname').val()){
-            if($('#password').hasClass('border-success')){
-                $('#password').removeClass('border-success');}
-            $('#password').addClass('border-danger');
+            addDanger('#password');
             $('#passCheck').html('Password cannot be the same as last name');
             $('#passCheck').show();
             return false;
         }
         else{
             $('#passCheck').hide();
-            if($('#password').hasClass('border-danger')){
-                $('#password').removeClass('border-danger');
-            }
-            $('#password').addClass('border-success');
+            addSuccess('#password');
         }
     });
     $('#confirmPassword').keyup(function(){
         if($('#password').val() != $('#confirmPassword').val()){
-            if($('#confirmPassword').hasClass('border-success')){
-                $('#confirmPassword').removeClass('border-success');}
-            $('#confirmPassword').addClass('border-danger');
+            addDanger('#confirmPassword');
             $('#matchCheck').show();
             return false;
         }
         else{
             $('#matchCheck').hide();
-            if($('#confirmPassword').hasClass('border-danger')){
-                $('#confirmPassword').removeClass('border-danger');
-            }
-            $('#confirmPassword').addClass('border-success');
+            addSuccess('#confirmPassword');
         }
     });
     return true;
 }
   
+function addDanger(id) {
+    if ($(id).hasClass('border-success')) {
+        $(id).removeClass('border-success');
+    }
+    $(id).addClass('border-danger');
+}
+
+function addSuccess(id) {
+    if ($(id).hasClass('border-danger')) {
+        $(id).removeClass('border-danger');
+    }
+    $(id).addClass('border-success');
+}
 
 function checkForm() {
     console.log('hello');

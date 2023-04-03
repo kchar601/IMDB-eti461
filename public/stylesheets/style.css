@@ -211,3 +211,29 @@ a.menuTab:hover{
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+/*movies page*/
+:root {
+  --button-width: 160px;
+}
+
+.dropdown-toggle{
+  width: var(--button-width);
+}
+
+.dropdown-menu-custom{
+  width: var(--button-width);
+  right: 0;
+}
+
+.dropdown-item{
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+.dropdown-item:hover{
+  text-decoration: none;
+}
+
+.selected{
+  background-color: #5b9dff;
+}
