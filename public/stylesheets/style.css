@@ -17,11 +17,14 @@
   margin-right: 1rem;
   }
   
+  .login-btn-keep{
+    margin-left: 15px;
+    border-radius: 5px;
+  }
+
   .login-btn {
-  margin-left: 15px;
   color: #212529;
   background-color: white;
-  border-radius: 5px;
   }
   
   .btn-medium {

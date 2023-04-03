@@ -24,159 +24,209 @@ function addErrorListener(){
     //then connect form to app.post('/signup', function(req, res){})
 
     $('#Fname').keyup(function(){
-        if($('#Fname').val().length < 1){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
+        if ($('#Fname').val().length < 1) {
+            if ($('#Fname').hasClass('border-success')) {
+                $('#Fname').removeClass('border-success');
+            }
             $('#Fname').addClass('border-danger');
             return false;
-        }
-        else{
-            if($('#Fname').hasClass('border-danger')){
+          } else {
+            if ($('#Fname').hasClass('border-danger')) {
                 $('#Fname').removeClass('border-danger');
             }
             $('#Fname').addClass('border-success');
-        }
+          }
     });
     $('#Lname').keyup(function(){
-        if($('#Lname').val().length < 1){
-            if($('#Lname').hasClass('border-success')){
-                $('#Lname').removeClass('border-success');}
+        if ($('#Lname').val().length < 1) {
+            if ($('#Lname').hasClass('border-success')) {
+                $('#Lname').removeClass('border-success');
+            }
             $('#Lname').addClass('border-danger');
             return false;
-        }
-        else{
-            $('#Lname').css('border-color', 'green');
-        }
-    });
+          } else {
+            if ($('#Lname').hasClass('border-danger')) {
+                $('#Lname').removeClass('border-danger');
+            }
+            $('#Lname').addClass('border-success');
+          }    });
     $('#email').keyup(function(){
         if(!($('#email').val().includes('@') && $('#email').val().includes('.'))){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#email').hasClass('border-success')){
+                $('#email').removeClass('border-success');}
+            $('#email').addClass('border-danger');
             $('#emailCheck').html('Email must be valid');
             $('#emailCheck').show();
             return false;
         }
         else{
             $('#emailCheck').hide();
-            $('#email').css('border-color', 'green');
+            if($('#email').hasClass('border-danger')){
+                $('#email').removeClass('border-danger');
+            }
+            $('#email').addClass('border-success');
         }
     });
     $('#username').keyup(function(){
         if ($('#username').val().length < 5) {
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#username').hasClass('border-success')){
+                $('#username').removeClass('border-success');}
+            $('#username').addClass('border-danger');
             $('#userCheck').html('Username must be at least 5 characters long');
             $('#userCheck').show();
             return false;
         }
         else{
             $('#userCheck').hide();
-            $('#username').css('border-color', 'green');
+            if($('#username').hasClass('border-danger')){
+                $('#username').removeClass('border-danger');
+            }
+            $('#username').addClass('border-success');
         }
     });
     $('#password').keyup(function(){
         if($('#password').val().length < 8){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password must be at least 8 characters long');
             $('#passCheck').show();
             return false;
         }
         if(!hasNumber($('#password').val())){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password must contain at least one number');
             $('#passCheck').show();
             return false;
         }
         if(!hasUpper($('#password').val())){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password must contain at least one uppercase letter');
             $('#passCheck').show();
             return false;
         }
         if(!hasLower($('#password').val())){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password must contain at least one lowercase letter');
             $('#passCheck').show();
             return false;
         }
         if(!hasSpecial($('#password').val())){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password must contain at least one special character');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#username').val()){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password cannot be the same as username');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#email').val()){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password cannot be the same as email');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#Fname').val()){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password cannot be the same as first name');
             $('#passCheck').show();
             return false;
         }
         if($('#password').val() == $('#Lname').val()){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#password').hasClass('border-success')){
+                $('#password').removeClass('border-success');}
+            $('#password').addClass('border-danger');
             $('#passCheck').html('Password cannot be the same as last name');
             $('#passCheck').show();
             return false;
         }
         else{
             $('#passCheck').hide();
-            $('#password').css('border-color', 'green');
+            if($('#password').hasClass('border-danger')){
+                $('#password').removeClass('border-danger');
+            }
+            $('#password').addClass('border-success');
         }
     });
     $('#confirmPassword').keyup(function(){
         if($('#password').val() != $('#confirmPassword').val()){
-            if($('#Fname').hasClass('border-success')){
-                $('#Fname').removeClass('border-success');}
-            $('#Fname').addClass('border-danger');
+            if($('#confirmPassword').hasClass('border-success')){
+                $('#confirmPassword').removeClass('border-success');}
+            $('#confirmPassword').addClass('border-danger');
             $('#matchCheck').show();
             return false;
         }
         else{
             $('#matchCheck').hide();
-            $('#confirmPassword').css('border-color', 'green');
+            if($('#confirmPassword').hasClass('border-danger')){
+                $('#confirmPassword').removeClass('border-danger');
+            }
+            $('#confirmPassword').addClass('border-success');
         }
     });
     return true;
 }
+  
 
-// function checkForm(){
-//     if ($('#Fname').val().length < 1) {
-//         return false;
-//     }
-        
-//     }
-// }
+function checkForm() {
+    console.log('hello');
+    const Fname = $('#Fname').val();
+    const Lname = $('#Lname').val();
+    const email = $('#email').val().toLowerCase();
+    const username = $('#username').val().toLowerCase();
+    const password = $('#password').val();
+    const confirmPassword = $('#confirmPassword').val();
+    
+    if ($('#Fname').hasClass('border-success') && $('#Lname').hasClass('border-success') && $('#email').hasClass('border-success') && $('#username').hasClass('border-success') && $('#password').hasClass('border-success') && $('#confirmPassword').hasClass('border-success')) {
+      if (password !== confirmPassword) {
+        console.log('Passwords do not match');
+        return false;
+      }
+      console.log('Attempting to register...')
+      try {
+        $.post("/attemptRegister", {'Fname' : Fname, 'Lname' : Lname, 'email' : email, 'username' : username, 'password' : password}, function(data){
+          if(data.success == true){
+            window.location.href = "login.html";
+          }
+          else{
+            if(data[0] == false && data[1] == "Username already exists"){
+              $('#userCheck').html('Username already exists');
+              $('#userCheck').show();
+            }
+            if(data[0] == false && data[1] == "Email already exists"){
+              $('#emailCheck').html('Email already exists');
+              $('#emailCheck').show();
+            }
+          }
+          console.log(data);
+        });
+      }
+      catch(err){
+        console.log(err);
+      }
+    } 
+    else {
+      console.log('false');
+      return false;
+    }
+  }
 
 function checkForCookie(){
     var cookie = document.cookie;
@@ -216,12 +266,4 @@ $(document).ready(function(){
     checkForCookie();
     clearErrors();
     addErrorListener();
-    $('#signupForm').keyup(function(){
-        if(checkForm()){
-            $('#signup-btn').attr('disabled', false);
-        }
-        else{
-            $('#signup-btn').attr('disabled', true);
-        }
-    });
 })

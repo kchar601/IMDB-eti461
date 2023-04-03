@@ -161,3 +161,53 @@ app.post('/checkLogin', function(req, res){
   run().catch(console.dir);
 })
 
+app.post('/attemptRegister', async function(req, res){
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require("mongodb");
+  const bcrypt = require("bcrypt");
+  const uri = process.env.uri;
+  const client = new MongoClient(uri,  {
+          serverApi: {
+              version: ServerApiVersion.v1,
+              strict: true,
+              deprecationErrors: true,
+          }
+      }
+  );
+  var fName = {Fname: req.body.Fname};
+  var lName = {Lname: req.body.Lname};
+  var user = {username: req.body.username};
+  var pswd = {password: req.body.password};
+  var email = {email: req.body.email};
+  console.log(fName);
+  console.log(lName);
+  console.log(user);
+  console.log(pswd);
+  console.log(email);
+  
+  try {
+    await client.connect();
+    const dbo = client.db("Users");
+    await dbo.command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+    const result = await dbo.collection("users").find({$or: [user, email]}).toArray();
+    if (result.length > 0) {
+      if (result.some(doc => doc.username === user.username)) {
+        res.json({success: false, message: "Username already exists"});
+      } else if (result.some(doc => doc.email === email.email)) {
+        res.json({success: false, message: "Email already exists"});
+      }
+    } else {
+      const hashedPassword = await bcrypt.hash(pswd.password, 10);
+      console.log(hashedPassword);
+      await dbo.collection("users").insertOne({...fName, ...lName, ...user, password: hashedPassword, ...email, role: "user"});
+      res.json({success: true});
+    };
+  } catch (err) {
+    console.error(err);
+    res.json({success: false, message: "An error occurred"});
+  } finally {
+    await client.close();
+  }
+});

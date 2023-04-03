@@ -16,38 +16,15 @@
     <script src="./javascripts/index.js"></script>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
-    <header>
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top border-bottom" style="padding-top:5px; border-radius: 0; margin-bottom:0px; position:sticky; top:0;">
-        <div class="container-fluid">
-              <a class="navbar-brand" href="javascript:void(0)">
-                <img src="./images/IMDBLogo.png" alt="logo" width=75px style="margin-left: 10px;" onclick="window.location = 'index.html'">
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="navbar-nav me-auto" style="font-size: 1.5em !important; padding: 5px !important;">
-                  <li class="nav-item">
-                    <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Movies</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Actors</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link nav-link-Head menuTab" href="javascript:void(0)">Directors</a>
-                  </li>
-                </ul>
-                <form class="d-flex" style="padding-left:20px;">
-                  <input class="form-control me-2" type="text" placeholder="Search" style="padding-right: 50px;">
-                </form>
-                <button class="btn btn-primary btn-medium" type="button">Search</button>
-                <button id="login-btn" class="btn btn-primary btn-medium login-btn" type="button" onclick="checkForCookie()">Login</button>
-              </div>
-            </div>
-          </nav> 
-    </header>
+  <div id="header"></div>
+  <script>
+    $(function(){
+      $("#header").load("shared/header.html"); 
+      var script = document.createElement('script');
+      script.src = 'shared/header.js';
+      document.head.appendChild(script);
+    });
+  </script>
 
     <body>
     <!-- Carousel -->
@@ -85,7 +62,7 @@
         </a>
       </div>
 
-    <div id="trending" class="container bg-light border border-dark trending-header d-flex flex-column">
+    <div id="trending" class="container bg-light border border-dark trending-header d-flex flex-column" style="margin-bottom: 40px;">
       <h1 class="hover-underline-animation">Trending Movies</h1>
       <ol>
         <li class="trending">
