@@ -1,7 +1,7 @@
 function selected(selector){
-    $(selector).addClass('selected');
-    $(selector).siblings().removeClass('selected');
-    $
+    $("#" + selector + "DD").addClass('selected');
+    $("#" + selector + "DD").siblings().removeClass('selected');
+    getSortStyle();    
 }
 
 function showMovies(data, status){
@@ -12,7 +12,7 @@ function showMovies(data, status){
             movie.actors.forEach(function(actor) {
                 for(var i = 0; i < actorList.length; i++){
                     if(actorList[i].id == actor){
-                        actors.push(" " + actorList[i].fname + " " + actorList[i].lname + " ");
+                        actors.push(" " + actorList[i].fname + " " + actorList[i].lname);
                     }}
                 });
             directors = [];
@@ -52,17 +52,23 @@ function setActorList(data, status){
 
 function getSortStyle(){
     const urlParams = new URLSearchParams(window.location.search).get('sortBy');
+    console.log(urlParams);
     switch(urlParams){
         case 'runtime':
-            var sortBy {runtime: -1};
+            var agg = [
+              {'$sort': {'runtime': -1}}];
         case 'rating':
-            var sortBy = {imdbrating: -1};
+          var agg = [
+            {'$sort': {'imdbrating': -1}}];
         case 'year':
-            var sortBy = {released: -1};
+          var agg = [
+            {'$sort': {'released': -1}}];
         default:
-            var sortBy = {title: 1};
-    }
-    $.get('/getMovies', sortBy, showMovies);
+          var agg = [
+            {'$sort': {'title': -1}}];
+      }
+      console.log(agg);
+    $.get('/getMovies', {'agg': agg}, showMovies);
 }
 
 $(document).ready(function() {

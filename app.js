@@ -24,25 +24,17 @@ app.get('/getMovies', async function(req,res){
           }
       }
   );
-  var sort = req.body.sortBy;
-  console.log(sort);
-  // switch (req.body.sort) {
-  //   case value:
-      
-  //     break;
-  
-  //   default:
-  //     break;
-  // }
+  // const aggr = {agg: req.body.agg};
+  // console.log(aggr);
   try {
       await client.connect();
       const dbo = client.db("movies");
       await dbo.command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-      const sortStyle = req.query.sort || "id";
-      const sorted = await dbo.collection("movies").aggregate([{$sort: sortStyle}]);
-      const items = await dbo.collection("movies").find({}).toArray();
-      res.json(items);
+      const coll = client.db('movies').collection('movies');
+      const cursor = coll.aggregate(aggr);
+      const result = await cursor.toArray();
+      res.json(result);
   } finally {
       await client.close();
   }
@@ -68,7 +60,6 @@ app.get('/getDirectors', function(req,res){
      await dbo.command({ ping: 1 });
      console.log("Pinged your deployment. You successfully connected to MongoDB!");
      const items = await dbo.collection("directors").find({}).toArray();
-     console.log(JSON.stringify(items));
      res.json(items);
    } finally {
      await client.close();
@@ -96,7 +87,6 @@ app.get('/getDirectors', function(req,res){
      await dbo.command({ ping: 1 });
      console.log("Pinged your deployment. You successfully connected to MongoDB!");
      const items = await dbo.collection("actors").find({}).toArray();
-     console.log(JSON.stringify(items));
      res.json(items);
    } finally {
      await client.close();
@@ -134,7 +124,6 @@ app.post('/checkLogin', function(req, res){
       
       const result = await dbo.collection("users").findOne(user);
       if (result) {
-        console.log(result);
         const passwordMatch = await bcrypt.compare(req.body.password, result.password);
         if (passwordMatch) {
           console.log("passwords match");
@@ -198,7 +187,6 @@ app.post('/attemptRegister', async function(req, res){
       }
     } else {
       const hashedPassword = await bcrypt.hash(pswd.password, 10);
-      console.log(hashedPassword);
       await dbo.collection("users").insertOne({...fName, ...lName, ...user, password: hashedPassword, ...email, role: "user"});
       res.json({success: true});
     };

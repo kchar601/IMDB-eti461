@@ -62,14 +62,25 @@
   text-align: left;
   }
   
+  .trend1desc{
+    overflow-wrap: break-word;
+    max-width: 80%;
+    font-size: 20px;
+    /*min-height: 50px; */
+  }
+
   .li-btn {
   background-color: transparent;
   border: none;
   padding-bottom: 20px;
+  width: 100%;
+  padding-right: 20px;
   }
   
   :not(:last-child) > .li-btn {
-  border-bottom: black 2px solid;
+  /*border-bottom: black 2px solid; */
+  width: 100%;
+  padding-right: 20px;
   }
   
   .trending > button img {
