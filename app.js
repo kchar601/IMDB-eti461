@@ -24,13 +24,24 @@ app.get('/getMovies', async function(req,res){
           }
       }
   );
+  var sort = req.body.sortBy;
+  console.log(sort);
+  // switch (req.body.sort) {
+  //   case value:
+      
+  //     break;
+  
+  //   default:
+  //     break;
+  // }
   try {
       await client.connect();
       const dbo = client.db("movies");
       await dbo.command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
       const sortStyle = req.query.sort || "id";
-      const items = await dbo.collection("movies").find({}).sort(sortStyle === "rating" ? {rating: -1} : {id: 1}).toArray();
+      const sorted = await dbo.collection("movies").aggregate([{$sort: sortStyle}]);
+      const items = await dbo.collection("movies").find({}).toArray();
       res.json(items);
   } finally {
       await client.close();

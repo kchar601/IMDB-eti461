@@ -1,6 +1,7 @@
 function selected(selector){
     $(selector).addClass('selected');
     $(selector).siblings().removeClass('selected');
+    $
 }
 
 function showMovies(data, status){
@@ -49,8 +50,21 @@ function setActorList(data, status){
     }
 }
 
+function getSortStyle(){
+    const urlParams = new URLSearchParams(window.location.search).get('sortBy');
+    switch(urlParams){
+        case 'runtime':
+            var sortBy {runtime: -1};
+        case 'rating':
+            var sortBy = {imdbrating: -1};
+        case 'year':
+            var sortBy = {released: -1};
+        default:
+            var sortBy = {title: 1};
+    }
+    $.get('/getMovies', sortBy, showMovies);
+}
+
 $(document).ready(function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.get('sortBy'));
-    $.get('/getMovies', urlParams.get('sortBy'), showMovies);
+    getSortStyle();
 })
