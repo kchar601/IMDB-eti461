@@ -248,3 +248,7 @@ a.menuTab:hover{
 .selected{
   background-color: #5b9dff;
 }
+
+body {
+  height: 100%;
+}

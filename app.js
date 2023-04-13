@@ -24,22 +24,46 @@ app.get('/getMovies', async function(req,res){
           }
       }
   );
-  // const aggr = {agg: req.body.agg};
-  // console.log(aggr);
   try {
       await client.connect();
       const dbo = client.db("movies");
       await dbo.command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-      const coll = client.db('movies').collection('movies');
-      const cursor = coll.aggregate(aggr);
-      const result = await cursor.toArray();
-      res.json(result);
+      const sortStyle = req.query.sort || "id";
+      const items = await dbo.collection("movies").find({}).sort(sortStyle === "rating" ? {rating: -1} : {id: 1}).toArray();
+      res.json(items);
   } finally {
       await client.close();
   }
 });
 
+app.get('/getSortedMovies', async function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = process.env.uri;
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  });
+
+  const aggr = JSON.parse(req.query.agg);
+  console.log('Received aggregation pipeline:', JSON.stringify(aggr));
+  try {
+    await client.connect();
+    const dbo = client.db('movies');
+    await dbo.command({ ping: 1 });
+    console.log('Pinged your deployment. You successfully connected to MongoDB!');
+    const coll = client.db('movies').collection('movies');
+    const cursor = coll.aggregate(aggr);
+    const result = await cursor.toArray();
+    res.json(result);
+  } finally {
+    await client.close();
+  }
+})
 
 app.get('/getDirectors', function(req,res){
   res.setHeader('Content-Type', 'application/json');
@@ -94,12 +118,6 @@ app.get('/getDirectors', function(req,res){
  }
  run().catch(console.dir);
  })
-
-app.listen(port, () => {
-
-  console.log(`Example app listening at http://localhost:${port}`)
-
-})
 
 app.post('/checkLogin', function(req, res){
   res.setHeader('Content-Type', 'application/json');
@@ -197,3 +215,9 @@ app.post('/attemptRegister', async function(req, res){
     await client.close();
   }
 });
+
+app.listen(port, () => {
+
+  console.log(`Example app listening at http://localhost:${port}`)
+
+})
