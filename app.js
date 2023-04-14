@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 var cookie = require('cookie');
+const nodemailer = require("nodemailer");
 const app = express()
 const port = 80
 app.use(express.static('public'))
@@ -213,6 +214,11 @@ app.post('/attemptRegister', async function(req, res){
     res.json({success: false, message: "An error occurred"});
   } finally {
     await client.close();
+  }
+  try {
+    nodemailer.createTransport({})
+  } catch (error) {
+    console.log(error)
   }
 });
 
