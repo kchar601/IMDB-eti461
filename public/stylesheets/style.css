@@ -4,7 +4,9 @@
   z-index: 1000;
   width: 100%;
   }
-  
+  body{
+    margin-top: 71px;;
+  }
   h5 {
   font-size: medium;
   }

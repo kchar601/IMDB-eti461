@@ -11,11 +11,11 @@ function check_user(){
         return false;
     }
     
-    $.post("/checkLogin", {'username': user, 'password': pswd}, function(data){ 
+    $.post("/checkLogin", {'username': user, 'password': pswd}, function(data){
         console.log(data); 
         if(data[0]){
             console.log("user exist")
-            window.location.href = "user.html?" + data[1]; 
+            window.location = "user.html";
         }
         else{
             console.log("user dont exist");
@@ -30,10 +30,7 @@ function checkForCookie(){
     var cookie = document.cookie;
     if(cookie != ""){
         console.log(cookie);
-        window.location.href = "user.html?" + cookie; //redirect bc user is already logged in and shouldn't be able to access login page
-        // $('#login-btn').html('<i class=\"fa-solid fa-user\" style=\"color: #ffffff;\"></i>');
-        // $('#login-btn').attr('onclick', 'window.location = \'user.html?' + cookie + '\'');
-        // $('#login-btn').css("background-color", "#0d6efd");
+        window.location.href = "user.html"; 
     }
     else{
         console.log("no cookie");

@@ -1,11 +1,16 @@
+
+
+
+
+
+
+
+
 function checkForCookie(){
     var cookie = document.cookie;
     if(cookie != ""){
         console.log(cookie);
-        $('#login-btn').html('<i class=\"fa-solid fa-user\" style=\"color: #ffffff;\"></i>');
-        $('#login-btn').attr('onclick', 'window.location = \'user.html\'');
-        $('#login-btn').removeClass('login-btn');
-
+        window.location.href = "user.html"; 
     }
     else{
         console.log("no cookie");
@@ -14,7 +19,7 @@ function checkForCookie(){
     }
 }
 
-$(document).ready(function(){
+$.document.ready(function(){
     console.log("ready");
     checkForCookie();
 });

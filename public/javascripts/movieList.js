@@ -5,7 +5,7 @@ function selected(selector){
 }
 function showMovies(data, status) {
     if (status) {
-      console.log(data);
+      //console.log(data);
         $('#movieList').empty();
   
       data.forEach(movie => {
@@ -21,8 +21,8 @@ function showMovies(data, status) {
                 if(directorList[i].id == movie.director){
                     directors.push(" " + directorList[i].fname + " " + directorList[i].lname + " ");
             }};  
-            console.log(directors);
-            console.log(actors);             
+            //console.log(directors);
+            //console.log(actors);             
             $('#movieList').append(`<li class="trending">
             <button class="li-btn" onclick="window.location.href=\"/movies.html#" + ` + movie.id + ` + "\"">
             <img style="float: left;" src="` + movie.poster + `">
@@ -53,7 +53,7 @@ function setActorList(data, status){
 
 function getSortStyle() {
     const urlParams = new URLSearchParams(window.location.search).get('sortBy');
-    console.log(urlParams);
+    //console.log(urlParams);
     let agg;
     switch (urlParams) {
       case 'runtime':
@@ -62,15 +62,14 @@ function getSortStyle() {
       case 'rating':
         agg = [{ '$sort': { 'imdbrating': -1 } }];
         break;
-      case 'year':
+      case 'release':
         agg = [{ '$sort': { 'released': -1 } }];
         break;
       default:
-        agg = [{ '$sort': { 'title': -1 } }];
+        agg = [{ '$sort': { 'title': 1 } }];
     }
-    console.log('Sending aggregation pipeline:', JSON.stringify(agg));
     $.get('/getSortedMovies', { 'agg': JSON.stringify(agg) }, showMovies);
-}  
+  }  
 
   $(document).ready(function () {
     $.when(directorList, actorList).done(function () {

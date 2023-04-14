@@ -47,7 +47,7 @@ function loadActors(actors){
 
 function addActor(line, num){
     const id = $('#trend' + num + 'act').text();
-    console.log(id);
+    //console.log(id);
     var cast = [];
     if(id.includes(' ' + line.id + ' ')){
         const name = line.fname + " " + line.lname;

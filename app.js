@@ -144,7 +144,7 @@ app.post('/checkLogin', function(req, res){
       if (result) {
         const passwordMatch = await bcrypt.compare(req.body.password, result.password);
         if (passwordMatch) {
-          console.log("passwords match");
+          //console.log("passwords match");
           res.cookie("user", result.username,           
           { 
             maxAge: 1000*60*60*24, //one day
@@ -155,15 +155,15 @@ app.post('/checkLogin', function(req, res){
           });
           res.json([true, "user=" + result.username + "&pass=" + result.password]);
         } else {
-          console.log("passwords don't match");
+          //console.log("passwords don't match");
           res.json([false]);
         }
       } else {
-        console.log("user not found");
+        //console.log("user not found");
         res.json([false]);
       };
     } catch (err) {
-      console.error(err);
+      //console.error(err);
     } finally {
       await client.close();
     }
