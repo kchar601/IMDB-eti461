@@ -205,7 +205,7 @@ app.post('/attemptRegister', async function(req, res){
       }
     } else {
       const hashedPassword = await bcrypt.hash(pswd.password, 10);
-      await dbo.collection("users").insertOne({...fName, ...lName, ...user, password: hashedPassword, ...email, role: "user"});
+      await dbo.collection("users").insertOne({...fName, ...lName, ...user, password: hashedPassword, ...email, role: "user", emailConfirm: false});
       res.json({success: true});
     };
   } catch (err) {

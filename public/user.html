@@ -14,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <link href="./stylesheets/style.css" type="text/css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+  <script src="./javascripts/user.js"></script>
 </head>
 <div id="header"></div>
 <script>
@@ -25,8 +26,34 @@
   });
 </script>
 <body>
-  <div class="container bg-light border border-dark" style="margin-bottom: 40px; margin-top: 111px;">
-    <h1 id="welcome"> Welcome Back, </h1>
+  <div class="bg-light border border-dark mx-5" style="margin-bottom: 40px; margin-top: 111px;">
+    <h1 id="welcome" class="px-4 mt-4 pb-2 mb-0 d-flex border-bottom border-secondary"> Welcome Back, </h1>
+    <div class="main-content d-flex flex-grow-1">
+      <div id="tab-sidebar" class="d-inline-flex flex-column ms-0 mt-0 border-end border-dark sidebar">
+        <button id="account-sidebar-btn" class="btn btn-medium btn-light btn-unround selected" onclick="tabSelect('account-sidebar-btn')"><i class="fa-solid fa-house me-2"></i>Account</button>
+        <button id="password-sidebar-btn" class="btn btn-medium btn-light btn-unround" onclick="tabSelect('password-sidebar-btn')"><i class="fa-solid fa-key me-2"></i>Password</button>
+        <button id="notification-sidebar-btn" class="btn btn-medium btn-light btn-unround" onclick="tabSelect('notification-sidebar-btn')"><i class="fa-solid fa-bell me-2"></i>Notifications</button>      </div>
+        <div class="content-wrapper d-flex flex-column flex-grow-1">
+          <div id="account-content" style="height:40vh">
+            <form id="updateUser" class="user-info-form d-flex">
+              <div class="profile-picture-wrapper mx-5 my-5 justify-content-center">
+                <img src="./images/no-prof-pic.png" class="prof-pic">
+                <button class="btn btn-secondary border text-medium mt-3 mx-auto" style="width:fit-content">Choose...</button>
+              </div>
+              <div class="form-content-wrapper my-5">
+                <label for="fName-input" class="text-medium">First Name:</label>
+                <input id="fName-input" class="form-control signupText w-20">
+                <label for="lName-input" class="text-medium">Last Name:</label>
+                <input id="lName-input" class="form-control signupText w-20">
+                <label for="email-input" class="text-medium">Email:</label>
+                <input id="email-input" class="form-control signupText w-20">
+              </div>
+            </form>
+          </div>
+        <div id="password-content" style="height:40vh"></div>
+        <div id="notification-content" style="height:40vh"></div>
+      </div>
+    </div>
   </div>
 </body>
 <div id="footer"></div>
