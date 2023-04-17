@@ -5,26 +5,27 @@ function tabSelect(selector){
         case 'account-sidebar-btn':
             $('#account-content').show();
             $('#password-content').hide();
-            $('#notifications-content').hide();
+            $('#notification-content').hide();
             break;
         case 'password-sidebar-btn':
             $('#account-content').hide();
             $('#password-content').show();
-            $('#notifications-content').hide();
+            $('#notification-content').hide();
             break;
-        case 'notifications-sidebar-btn':
+        case 'notification-sidebar-btn':
             $('#account-content').hide();
             $('#password-content').hide();
-            $('#notifications-content').show();
+            $('#notification-content').show();
             break;
     }
 }
 
-function addUserData(user){
+function addUserData(data){
+    const user = data[0];
     $('#welcome').append(user.Fname);
     $('#fName-input').attr('placeholder', user.Fname);
-    $('#lName-input').attr('placeholder', user.lName);
-
+    $('#lName-input').attr('placeholder', user.Lname);
+    $('#email-input').attr('placeholder', user.email);
 }
 
 
@@ -41,5 +42,7 @@ function checkForCookie(){
 
 $(document).ready(function(){
     checkForCookie();
-    //$.get('/getUser', addUserData)
+    const username = document.cookie.split('=')[1].split(';')[0];
+    console.log(username);
+    $.get('/getUser', {"username": username}, addUserData);
 });

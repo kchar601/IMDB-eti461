@@ -36,17 +36,18 @@
         <div class="content-wrapper d-flex flex-column flex-grow-1">
           <div id="account-content" style="height:40vh">
             <form id="updateUser" class="user-info-form d-flex">
-              <div class="profile-picture-wrapper mx-5 my-5 justify-content-center">
+              <div class="profile-picture-wrapper mx-5 my-auto justify-content-center">
                 <img src="./images/no-prof-pic.png" class="prof-pic">
-                <button class="btn btn-secondary border text-medium mt-3 mx-auto" style="width:fit-content">Choose...</button>
+                <button class="btn btn-secondary border text-medium mt-3 mx-auto" style="width:fit-content" onclick="return false">Choose...</button>
               </div>
-              <div class="form-content-wrapper my-5">
+              <div class="form-content-wrapper my-3">
                 <label for="fName-input" class="text-medium">First Name:</label>
                 <input id="fName-input" class="form-control signupText w-20">
                 <label for="lName-input" class="text-medium">Last Name:</label>
                 <input id="lName-input" class="form-control signupText w-20">
                 <label for="email-input" class="text-medium">Email:</label>
                 <input id="email-input" class="form-control signupText w-20">
+                <button id="updateUser" class="btn btn-primary mx-auto text-medium mt-2" style="width: fit-content;">Save</button>
               </div>
             </form>
           </div>

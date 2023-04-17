@@ -15,7 +15,7 @@ function check_user(){
         console.log(data); 
         if(data[0]){
             console.log("user exist")
-            window.location = "user.html";
+            window.location = "index.html";
         }
         else{
             console.log("user dont exist");

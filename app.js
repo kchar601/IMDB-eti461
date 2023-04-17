@@ -30,8 +30,7 @@ app.get('/getMovies', async function(req,res){
       const dbo = client.db("movies");
       await dbo.command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-      const sortStyle = req.query.sort || "id";
-      const items = await dbo.collection("movies").find({}).sort(sortStyle === "rating" ? {rating: -1} : {id: 1}).toArray();
+      const items = await dbo.collection("movies").find({}).toArray();
       res.json(items);
   } finally {
       await client.close();
@@ -119,6 +118,37 @@ app.get('/getDirectors', function(req,res){
  }
  run().catch(console.dir);
  })
+
+app.get('/getUser', function(req,res){
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require("mongodb");
+  const uri = process.env.uri;
+  const client = new MongoClient(uri,  {
+          serverApi: {
+              version: ServerApiVersion.v1,
+              strict: true,
+              deprecationErrors: true,
+          }
+      }
+  );
+  console.log("hello");
+  async function run() { 
+    try {
+      await client.connect();
+      const dbo = client.db("Users");
+      await dbo.command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+      const username = req.query.username;
+      const items = await dbo.collection("users").find({"username": username}).toArray();
+      res.json(items);
+  } finally {
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
+})
+
+
 
 app.post('/checkLogin', function(req, res){
   res.setHeader('Content-Type', 'application/json');
