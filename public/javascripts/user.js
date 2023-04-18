@@ -28,6 +28,11 @@ function addUserData(data){
     $('#email-input').attr('placeholder', user.email);
 }
 
+function logout(){
+    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    document.cookie = "pass=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    window.location.href = "index.html";
+}
 
 function checkForCookie(){
     var cookie = document.cookie;
