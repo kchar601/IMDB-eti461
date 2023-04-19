@@ -69,3 +69,11 @@ $(document).ready(function getInfo() {
       .then(() => $.get("/getActors", loadActors)));
   });
 
+  document.getElementById('searchButton').addEventListener('click', function() {
+    // Get the search term from the input box
+    var searchTerm = document.getElementById('searchBox').value;
+    if (searchTerm != ""){
+        console.log(searchTerm);
+        window.location = "/searchResults.html?search=" + encodeURIComponent(searchTerm);
+    }
+});

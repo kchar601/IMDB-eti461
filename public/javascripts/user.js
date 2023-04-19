@@ -31,6 +31,7 @@ function addUserData(data){
 function logout(){
     document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     document.cookie = "pass=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
     window.location.href = "index.html";
 }
 

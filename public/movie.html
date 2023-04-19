@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMBd - Movies and More</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/ea918388ae.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="./stylesheets/style.css" type="text/css" rel="stylesheet">
+  <script src="./javascripts/movie.js"></script>
+  <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+</head>
+
+<div id="header"></div>
+<script>
+  $(function(){
+    $("#header").load("shared/header.html"); 
+    var script = document.createElement('script');
+    script.src = 'shared/header.js';
+    document.head.appendChild(script);
+  });
+</script>
+
+<body style="margin-top: 71px;" class="bg-light">
+    <div class="container justify-content-center text-center mx-auto" style="height:fit-content">
+        <div id="movie-div">
+            <form>
+                <div class="profile-picture-wrapper mx-5 my-auto justify-content-center">
+                    <img id="movie-poster" class="small-poster mx-auto mt-5">
+                    <button class="btn btn-secondary border text-medium mt-3 mx-auto" style="width:fit-content" onclick="return false">Choose...</button>
+                  </div>
+                  <div class="my-3">
+                    <label for="title-input" class="text-medium">Title:</label>
+                    <input id="title-input" class="form-control signupText mx-auto text-center" style="width:fit-content">
+                    <label for="desc-input" class="text-medium">Description:</label>
+                    <textarea id="desc-input" class="form-control mx-auto" style="width: 50rem; font-size: 14px;"></textarea>
+                    <label for="rating-input" class="text-medium">Rating:</label>
+                    <input id="rating-input" class="form-control signupText mx-auto text-center" style="width: 5rem;">
+                    <button id="updateMovie" class="btn btn-primary mx-auto text-medium mt-2" style="width: fit-content;">Save</button>
+                  </div>
+            </form>
+        </div>
+    </div>
+</body>
+<div id="footer"></div>
+<script>
+  $(function(){
+    $("#footer").load("shared/footer.html"); 
+  });
+</script>
+</html>

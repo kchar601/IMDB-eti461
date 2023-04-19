@@ -7,6 +7,7 @@ const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 var cookie = require('cookie');
 const nodemailer = require("nodemailer");
+const cors = require('cors');
 const app = express()
 const port = 80
 app.use(express.static('public'))
@@ -67,16 +68,16 @@ app.get('/getSortedMovies', async function(req, res) {
 
 app.get('/getDirectors', function(req,res){
   res.setHeader('Content-Type', 'application/json');
- const { MongoClient, ServerApiVersion } = require("mongodb");
- const uri = process.env.uri;
- const client = new MongoClient(uri,  {
-         serverApi: {
-             version: ServerApiVersion.v1,
-             strict: true,
-             deprecationErrors: true,
-         }
-     }
- );
+  const { MongoClient, ServerApiVersion } = require("mongodb");
+  const uri = process.env.uri;
+  const client = new MongoClient(uri,  {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  }); 
+
  async function run() {
    try {
      await client.connect();
@@ -89,6 +90,7 @@ app.get('/getDirectors', function(req,res){
      await client.close();
    }
  }
+
  run().catch(console.dir);
  })
 
@@ -131,7 +133,6 @@ app.get('/getUser', function(req,res){
           }
       }
   );
-  console.log("hello");
   async function run() { 
     try {
       await client.connect();
@@ -181,6 +182,10 @@ app.post('/checkLogin', function(req, res){
             maxAge: 1000*60*60*24, //one day
           });
           res.cookie("pass", result.password,
+          { 
+            maxAge: 1000*60*60*24, //one day
+          });
+          res.cookie("role", result.role,           
           { 
             maxAge: 1000*60*60*24, //one day
           });
@@ -257,3 +262,45 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 
 })
+
+app.post('/searchContents', async function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = process.env.uri;
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  });
+
+  const searchTerm = req.query.term;
+
+  async function searchCollection(collectionName, searchField) {
+    const regex = new RegExp(searchTerm, 'i');
+    const query = { [searchField]: regex };
+    return await dbo.collection(collectionName).find(query).toArray();
+  }
+
+  try {
+    await client.connect();
+    const dbo = client.db('movies');
+    await dbo.command({ ping: 1 });
+    console.log('Pinged your deployment. You successfully connected to MongoDB!');
+
+    const movieResults = await searchCollection('movies', 'title');
+    const actorResults = await searchCollection('actors', 'name');
+    const directorResults = await searchCollection('directors', 'name');
+
+    const results = {
+      movies: movieResults,
+      actors: actorResults,
+      directors: directorResults,
+    };
+
+    res.json(results);
+  } finally {
+    await client.close();
+  }
+});
