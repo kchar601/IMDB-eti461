@@ -15,9 +15,8 @@ function setActorList(data, status){
 
 function showMovies(data, status) {
     if (status) {
-      //console.log(status);
         $('#movieList').empty();
-        findMatch(data);
+        //findMatch(data);
   
       data.forEach(movie => {
         actors = [];
@@ -34,7 +33,7 @@ function showMovies(data, status) {
             }};  
             
             //console.log(actors);
-            $('#movieList').append(`<li class="trending">
+            $('#movieList').append(`<li class="trending" style="list-style-type: none;">
             <button class="li-btn" onclick="window.location.href=\"/movies.html#" + ` + movie.id + ` + "\"">
             <img style="float: left;" src="` + movie.poster + `">
             <h2>` + movie.title + `</h2>
@@ -100,8 +99,7 @@ function findMatch(data){
         document.getElementById("searchingFor").innerText = uniqResults.length.toString() + ' results for "' + query + '"';
     }
 
-    //this is where all the contents are logged, Keith
-    console.log(uniqResults);
+    showMovies(uniqResults, "success");
 
 } 
 
