@@ -50,16 +50,64 @@ function showMovies(data, status) {
 function findMatch(data){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const query = urlParams.get('query');
+    const query = urlParams.get('query').toLowerCase();
+    //console.log(data);
 
-    let searchString = document.getElementById(query)
-    const foundArray = data.filter(subArray => subArray.indexOf(searchString) !== -1);
-    console.log(foundArray);
-}
+    const lowercaseData = data.map(obj => {
+        const lowercaseData = {};
+        for (let key in obj) {
+            lowercaseData[key] = typeof obj[key] === 'string' ? obj[key].toLowerCase() : obj[key];
+        }
+        return lowercaseData;
+      });
+      
+
+    const results = [];
+    
+    //shows ratings
+    lowercaseData.forEach(element => {
+        if (element.rated.includes(query)){
+            results.push(data[lowercaseData.indexOf(element)]);
+        }
+    });
+
+    //shows titles
+    lowercaseData.forEach(element => {
+        if (element.title.includes(query)){
+            results.push(data[lowercaseData.indexOf(element)]);
+        }
+    });
+
+    //shows descriptions
+    lowercaseData.forEach(element => {
+        if (element.desc.includes(query)){
+            results.push(data[lowercaseData.indexOf(element)]);
+        }
+    });
+
+    uniqResultsSet = new Set(results);
+    uniqResults = [];
+
+    for (const x of uniqResultsSet.values()) {
+        uniqResults.push(x);
+    }
+
+    if (uniqResults.length == 0){
+        document.getElementById("searchingFor").innerText = 'No results for "' + query + '"';
+    } else if (uniqResults.length == 1){
+        document.getElementById("searchingFor").innerText = uniqResults.length.toString() + ' result for "' + query + '"';
+    } else {
+        document.getElementById("searchingFor").innerText = uniqResults.length.toString() + ' results for "' + query + '"';
+    }
+
+    //this is where all the contents are logged, Keith
+    console.log(uniqResults);
+
+} 
 
 $(document).ready(function() {
     $.when(directorList, actorList).done(function () {
-        $.get('/getMovies', showMovies);
+        $.get('/getMovies', findMatch);
       });
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

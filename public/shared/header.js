@@ -7,7 +7,7 @@ function checkForCookie(){
 
     }
     else{
-        console.log("no cookie");
+        //console.log("no cookie");
         $('#login-btn').html('Login');
         $('#login-btn').attr('onclick', 'window.location = \'login.html\'');
     }
