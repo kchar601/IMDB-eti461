@@ -9,7 +9,7 @@ function loadMovies(movies){
 
 function addMovie(line, id){
     if(line.id==id){
-        $('#trend'+ id +'btn').attr('onclick', 'window.location.href=\"/movies.html#' + line.id + '\"');
+        $('#trend'+ id +'btn').attr('onclick', 'window.location.href=\"/movie.html#' + line.id + '\"');
         $('#trend'+ id +'img').attr('src', line.poster);
         $('#trend'+ id + 'head').text(line.title);
         $('#trend' + id + 'desc').text(line.desc);
@@ -71,6 +71,12 @@ $(document).ready(function getInfo() {
 
 
 function search(){
-    let query = encodeURIComponent(document.getElementById("searchBox").value);
-    window.location = "/searchResults.html?query=" + query;
+    let query = document.getElementById("searchBox").value;
+    console.log(query);
+    if (query == null || query == ""){
+        return false;
+    } else {
+        window.location = "/searchResults.html?query=" + encodeURIComponent(query);
+    }
+    
 }

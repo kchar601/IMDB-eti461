@@ -1,83 +1,68 @@
-$(document).ready(function loadContent() {
+var directorList = $.get('/getDirectors', setDirectorList);
+var actorList = $.get('/getActors', setActorList);
+
+function setDirectorList(data, status){
+    if(status){
+        directorList = data;
+    }
+}
+
+function setActorList(data, status){
+    if(status){
+        actorList = data;
+    }
+}
+
+function showMovies(data, status) {
+    if (status) {
+      //console.log(status);
+        $('#movieList').empty();
+        findMatch(data);
+  
+      data.forEach(movie => {
+        actors = [];
+            movie.actors.forEach(function(actor) {
+                for(var i = 0; i < actorList.length; i++){
+                    if(actorList[i].id == actor){
+                        actors.push(" " + actorList[i].fname + " " + actorList[i].lname);
+                    }}
+                });
+            directors = [];
+            for(var i = 0; i < directorList.length; i++){
+                if(directorList[i].id == movie.director){
+                    directors.push(" " + directorList[i].fname + " " + directorList[i].lname + " ");
+            }};  
+            
+            //console.log(actors);
+            $('#movieList').append(`<li class="trending">
+            <button class="li-btn" onclick="window.location.href=\"/movies.html#" + ` + movie.id + ` + "\"">
+            <img style="float: left;" src="` + movie.poster + `">
+            <h2>` + movie.title + `</h2>
+            <p>` + movie.desc + `</p>
+            <p>` + directors + `</p>
+            <p>` + actors + `</p>
+            </button>
+            </li>`);
+            
+    })}
+}
+
+function findMatch(data){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const query = urlParams.get('query');
+
+    let searchString = document.getElementById(query)
+    const foundArray = data.filter(subArray => subArray.indexOf(searchString) !== -1);
+    console.log(foundArray);
+}
+
+$(document).ready(function() {
+    $.when(directorList, actorList).done(function () {
+        $.get('/getMovies', showMovies);
+      });
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const query = urlParams.get('query');
     document.getElementById("searchingFor").innerText = 'Searching for: "' + query + '"';
-  });
-
-  function loadMovies(movies){
-    for (let i = 0; i<movies.length; i++){
-        const oneLine = movies[i];
-        for(n=1; n<4; n++){
-            addMovie(oneLine, n);
-        }
-    }
-}
-
-function addMovie(line, id){
-    if(line.id==id){
-        $('#search'+ id +'btn').attr('onclick', 'window.location.href=\"/movies.html#' + line.id + '\"');
-        $('#search'+ id +'img').attr('src', line.poster);
-        $('#search'+ id + 'head').text(line.title);
-        $('#search' + id + 'desc').text(line.desc);
-        $('#search' + id + 'dir').text(line.director);
-        line.actors.forEach(function(actor) {
-            $('#search' + id + 'act').append(' ' + actor + ' ');
-          });    
-        }
-}
-
-function loadDirectors(directors){
-    for (let i = 0; i<directors.length; i++){
-        const oneLine = directors[i];
-        for(n=1; n<4; n++){
-            addDirector(oneLine, n);
-        }
-    }
-}
-
-function addDirector(line, num){
-    const id = $('#search' + num + 'dir').text();
-    if(line.id === parseInt(id, 10)){
-        $('#search'+ num +'dir').text("Director: " + line.fname + " " + line.lname);
-    }
-}
-
-function loadActors(actors){
-    for (let i = 0; i<actors.length; i++){
-        const oneLine = actors[i];
-        for(n=1; n<4; n++){
-            addActor(oneLine, n);
-        }
-    }
-}
-
-function addActor(line, num){
-    const id = $('#search' + num + 'act').text();
-    //console.log(id);
-    var cast = [];
-    if(id.includes(' ' + line.id + ' ')){
-        const name = line.fname + " " + line.lname;
-        $('#search'+ num +'act').text($('#search'+ num +'act').text().replace(line.id, name));
-        if(hasNumber(document.getElementById("search" + num + 'act').innerHTML)){
-            document.getElementById("search" + num + 'act').innerHTML = document.getElementById("search" + num + 'act').innerHTML.replace(name, name + ", ");
-        }
-    }
-}
-
-function hasNumber(myString) {
-    return /\d/.test(myString);
-  }
-
-
-$(document).ready(function getInfo() {
-    $.get("/getMovies", loadMovies)
-      .then(() => $.get("/getDirectors", loadDirectors)
-      .then(() => $.get("/getActors", loadActors)));
-  });
-
-
-function search(){
-    let query = encodeURIComponent(document.getElementById("searchBox").value);
-    window.location = "/searchResults.html?query=" + query;
-}
+});

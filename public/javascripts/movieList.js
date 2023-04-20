@@ -24,7 +24,7 @@ function showMovies(data, status) {
             //console.log(directors);
             //console.log(actors);             
             $('#movieList').append(`<li class="trending">
-            <button class="li-btn" onclick="window.location.href=\"/movies.html#" + ` + movie.id + ` + "\"">
+            <button class="li-btn" onclick="window.location.href=\'/movie.html#` + movie.id + `\'">
             <img style="float: left;" src="` + movie.poster + `">
             <h2>` + movie.title + `</h2>
             <p>` + movie.desc + `</p>
@@ -69,7 +69,7 @@ function getSortStyle() {
         agg = [{ '$sort': { 'title': 1 } }];
     }
     $.get('/getSortedMovies', { 'agg': JSON.stringify(agg) }, showMovies);
-  }  
+  }   
 
   $(document).ready(function () {
     $.when(directorList, actorList).done(function () {

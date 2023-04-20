@@ -28,11 +28,22 @@
 </script>
 
 <body style="margin-top: 71px;" class="bg-light">
-    <div class="container justify-content-center text-center mx-auto" style="height:fit-content">
-        <div id="movie-div">
-            <form>
+    <div class="container mx-auto" style="height:fit-content">
+      <h1 id="movie-title-header" class="my-3 text-center"></h1>
+        <div id="movie-div" class="border border-secondary mb-5 p-5" style="height:fit-content">
+          <div id="userView" class="d-inline-flex my-5" style="height:fit-content">
+          <img id="movie-poster1" class="d-inline-flex small-poster mx-auto" style="float: left;">
+          <div class="movie-info ms-3">
+            <span id="movie-desc" class="text-large d-inline-flex"></span><br>
+            <span id="movie-rating" class="text-large d-inline-flex my-1"></span><br>
+            <span id="movie-runtime" class="text-large d-inline-flex"></span><br>
+            <span id="movie-release" class="text-large d-inline-flex my-1"></span><br>
+            <span id="movie-score" class="text-large d-inline-flex"></span>
+          </div>
+          </div>
+            <form id="editMovie" class="justify-content-center text-center">
                 <div class="profile-picture-wrapper mx-5 my-auto justify-content-center">
-                    <img id="movie-poster" class="small-poster mx-auto mt-5">
+                    <img id="movie-poster2" class="small-poster mx-auto mt-5">
                     <button class="btn btn-secondary border text-medium mt-3 mx-auto" style="width:fit-content" onclick="return false">Choose...</button>
                   </div>
                   <div class="my-3">
@@ -42,7 +53,13 @@
                     <textarea id="desc-input" class="form-control mx-auto" style="width: 50rem; font-size: 14px;"></textarea>
                     <label for="rating-input" class="text-medium">Rating:</label>
                     <input id="rating-input" class="form-control signupText mx-auto text-center" style="width: 5rem;">
-                    <button id="updateMovie" class="btn btn-primary mx-auto text-medium mt-2" style="width: fit-content;">Save</button>
+                    <label for="runtime-input" class="text-medium">Runtime:</label>
+                    <input id="runtime-input" class="form-control signupText mx-auto text-center" style="width:6rem;">
+                    <label for="release-input" class="text-medium">Release Date:</label>
+                    <input id="release-input" class="form-control signupText mx-auto text-center" style="width:10rem">
+                    <label for="imbd-input" class="text-medium">IMBd Score:</label>
+                    <input id="imbd-input" class="form-control signupText mx-auto text-center" style="width: 5rem">
+                    <button id="updateMovie" class="btn btn-primary mx-auto text-medium mt-3" style="width: fit-content;">Save</button>
                   </div>
             </form>
         </div>

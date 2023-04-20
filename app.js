@@ -48,9 +48,8 @@ app.get('/getSortedMovies', async function(req, res) {
       strict: true,
       deprecationErrors: true,
     },
-  });
-
-  const aggr = JSON.parse(req.query.agg);
+  }); 
+  const aggr = JSON.parse(req.query.agg);  
   console.log('Received aggregation pipeline:', JSON.stringify(aggr));
   try {
     await client.connect();
