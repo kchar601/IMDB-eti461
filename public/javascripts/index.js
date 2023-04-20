@@ -72,7 +72,7 @@ $(document).ready(function getInfo() {
 
 function search(){
     let query = document.getElementById("searchBox").value;
-    console.log(query);
+    //console.log(query);
     if (query == null || query == ""){
         return false;
     } else {
@@ -80,3 +80,9 @@ function search(){
     }
     
 }
+
+$('#searchBox').on("keyup", function(e) {
+    if (e.keyCode == 13) {
+        console.log('Enter');
+    }
+});
