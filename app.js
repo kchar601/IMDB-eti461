@@ -263,7 +263,7 @@ app.listen(port, () => {
 
 })
 
-app.post('/searchContents', async function(req, res) {
+app.post('/search', async function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   const { MongoClient, ServerApiVersion } = require('mongodb');
   const uri = process.env.uri;
@@ -275,13 +275,8 @@ app.post('/searchContents', async function(req, res) {
     },
   });
 
-  const searchTerm = req.query.term;
-
-  async function searchCollection(collectionName, searchField) {
-    const regex = new RegExp(searchTerm, 'i');
-    const query = { [searchField]: regex };
-    return await dbo.collection(collectionName).find(query).toArray();
-  }
+  const value = req.params.value;
+  const collections = ['movies', 'directors', 'actors']; // add collection names here
 
   try {
     await client.connect();
@@ -289,17 +284,15 @@ app.post('/searchContents', async function(req, res) {
     await dbo.command({ ping: 1 });
     console.log('Pinged your deployment. You successfully connected to MongoDB!');
 
-    const movieResults = await searchCollection('movies', 'title');
-    const actorResults = await searchCollection('actors', 'name');
-    const directorResults = await searchCollection('directors', 'name');
-
-    const results = {
-      movies: movieResults,
-      actors: actorResults,
-      directors: directorResults,
-    };
-
-    res.json(results);
+    let result = [];
+    for (const collection of collections) {
+      const cursor = dbo.collection(collection).find({ $text: { $search: value } });
+      const items = await cursor.toArray();
+      if (items.length > 0) {
+        result.push({ collection: collection, items: items });
+      }
+    }
+    res.json(result);
   } finally {
     await client.close();
   }
