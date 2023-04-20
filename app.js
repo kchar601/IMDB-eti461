@@ -148,7 +148,32 @@ app.get('/getUser', function(req,res){
   run().catch(console.dir);
 })
 
-
+app.get('/getUsers', function(req,res){
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require("mongodb");
+  const uri = process.env.uri;
+  const client = new MongoClient(uri,  {
+          serverApi: {
+              version: ServerApiVersion.v1,
+              strict: true,
+              deprecationErrors: true,
+          }
+      }
+  );
+  async function run() { 
+    try {
+      await client.connect();
+      const dbo = client.db("Users");
+      await dbo.command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+      const items = await dbo.collection("users").find({}).toArray();
+      res.json(items);
+  } finally {
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
+});
 
 app.post('/checkLogin', function(req, res){
   res.setHeader('Content-Type', 'application/json');
@@ -261,6 +286,35 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 
 })
+
+app.post('/updateMovie', async function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = process.env.uri;
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+      },
+      
+    });
+    
+    try {
+      await client.connect();
+      const dbo = client.db('movies');
+      await dbo.command({ ping: 1 });
+      console.log('Pinged your deployment. You successfully connected to MongoDB!');
+      const movie = req.body.movie;
+      const result = await dbo.collection('movies').updateOne({id: req.body.id}, {$set: movie});
+      res.json(result);
+    }
+    finally {
+      await client.close();
+    }
+    
+  });
+
 
 app.post('/search', async function(req, res) {
   res.setHeader('Content-Type', 'application/json');

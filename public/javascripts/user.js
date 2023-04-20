@@ -22,6 +22,10 @@ function tabSelect(selector){
 
 function addUserData(data){
     const user = data[0];
+    console.log(user);
+    if(user.role=="admin"){
+        $('#admin-link-btn').show();
+    }
     $('#welcome').append(user.Fname);
     $('#fName-input').attr('placeholder', user.Fname);
     $('#lName-input').attr('placeholder', user.Lname);

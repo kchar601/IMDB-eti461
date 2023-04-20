@@ -1,10 +1,11 @@
+const url =  window.location.href;
+const movieID = url.split("#")[1];
+
 function showEditableMovie(data, status){
     if(!status){
         console.log("error");
     }
     else{
-        const url =  window.location.href;
-        const movieID = url.split("#")[1];
         console.log(data);
         data.forEach(movie => {
             console.log(movie.title)
@@ -27,8 +28,7 @@ function showMovie(data, status){
         console.log("error");
     }
     else{
-        const url =  window.location.href;
-        const movieID = url.split("#")[1];
+
         data.forEach(movie => {
             if (movie.id == movieID) {
                 $("#movie-title-header").text(movie.title);
@@ -44,32 +44,57 @@ function showMovie(data, status){
     }
 }
 
+function updateMovie(){
+    const title = $("#title-input").val();
+    const desc = $("#desc-input").val();
+    const rated = $("#rating-input").val();
+    const runtime = $("#runtime-input").val();
+    const released = $("#release-input").val();
+    const imdbrating = $("#imbd-input").val();
+
+    const movie = {
+        title: title,
+        desc: desc,
+        rated: rated,
+        runtime: runtime,
+        released: released,
+        imdbrating: imdbrating
+        };
+
+    $.post("/updateMovie", {movie: movie,  id: movieID}, function(data, status){
+        if(!status){
+            console.log("error");
+        }
+        else{
+            console.log(data);
+            window.location.href = "/movie.html#"+data.id;
+        }
+    
+    });
+}
+
+
 $(document).ready(function(){
     if(!document.cookie){
         console.log("user");
-        $("#editMovie").attr("display", "none");
-        $("#editMovie").attr("height", "0px");
-        $("#editMovie").removeClass("my-5");
+        $("#editMovie").hide();
         $("#footer").addClass("fixed-bottom");
-        $.get("/getMovies", showMovie)    
+        $.get("/getMovies", showMovie);
     }
     else{
         const role = document.cookie.split('=')[3].split(';')[0];
         console.log(role);
         if(role == "admin"){
             console.log("admin");
-            $("#userView").attr("display", "none");
-            $("#userView").attr("height", "0px");
-            $("#userView").removeClass("my-5");
-            $.get("/getMovies", showEditableMovie)
+            $("#userView").hide().removeClass("d-inline-flex");
+            $.get("/getMovies", showEditableMovie);
+            document.getElementById("updateMovie").addEventListener("click", updateMovie);
         }
         else{
             console.log("user");
-            $("#editMovie").attr("display", "none");
-            $("#editMovie").attr("height", "0px");
-            $("#editMovie").removeClass("my-5");
+            $("#editMovie").hide();
             $("#footer").addClass("fixed-bottom");
-            $.get("/getMovies", sortMovie) 
+            $.get("/getMovies", sortMovie);
         }
     }
 });
