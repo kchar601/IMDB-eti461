@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 var cookie = require('cookie');
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 const cors = require('cors');
 const app = express()
-const port = 80
+const port = 3000
 app.use(express.static('public'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -231,53 +231,75 @@ app.post('/checkLogin', function(req, res){
   run().catch(console.dir);
 })
 
-app.post('/attemptRegister', async function(req, res){
+app.post('/attemptRegister', async function (req, res) {
   res.setHeader('Content-Type', 'application/json');
-  const { MongoClient, ServerApiVersion } = require("mongodb");
-  const bcrypt = require("bcrypt");
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const bcrypt = require('bcrypt');
   const uri = process.env.uri;
-  const client = new MongoClient(uri,  {
-          serverApi: {
-              version: ServerApiVersion.v1,
-              strict: true,
-              deprecationErrors: true,
-          }
-      }
-  );
-  var fName = {Fname: req.body.Fname};
-  var lName = {Lname: req.body.Lname};
-  var user = {username: req.body.username};
-  var pswd = {password: req.body.password};
-  var email = {email: req.body.email};
-  
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
+  var fName = { Fname: req.body.Fname };
+  var lName = { Lname: req.body.Lname };
+  var user = { username: req.body.username };
+  var pswd = { password: req.body.password };
+  var email = { email: req.body.email };
+
   try {
     await client.connect();
-    const dbo = client.db("Users");
+    const dbo = client.db('Users');
     await dbo.command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    
-    const result = await dbo.collection("users").find({$or: [user, email]}).toArray();
+    console.log('Pinged your deployment. You successfully connected to MongoDB!');
+
+    const result = await dbo.collection('users').find({ $or: [user, email] }).toArray();
     if (result.length > 0) {
       if (result.some(doc => doc.username === user.username)) {
-        res.json({success: false, message: "Username already exists"});
+        res.json({ success: false, message: 'Username already exists' });
       } else if (result.some(doc => doc.email === email.email)) {
-        res.json({success: false, message: "Email already exists"});
+        res.json({ success: false, message: 'Email already exists' });
       }
     } else {
       const hashedPassword = await bcrypt.hash(pswd.password, 10);
-      await dbo.collection("users").insertOne({...fName, ...lName, ...user, password: hashedPassword, ...email, role: "user", emailConfirm: false});
-      res.json({success: true});
+      await dbo.collection('users').insertOne({ ...fName, ...lName, ...user, password: hashedPassword, ...email, role: 'user', emailConfirm: false });
+      res.json({ success: true });
     };
   } catch (err) {
     console.error(err);
-    res.json({success: false, message: "An error occurred"});
+    res.json({ success: false, message: 'An error occurred' });
   } finally {
     await client.close();
   }
+
+  const text = `<h2>Click the link below to confirm your email address</h2>
+  <a href="http://localhost:3000/confirmEmail?user=${user.username}">Confirm Email</a>`;
+  
   try {
-    nodemailer.createTransport({})
+    const transporter = nodemailer.createTransport({
+      host: 'smtp-relay.sendinblue.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.SENDINBLUE_USERNAME,
+        pass: process.env.SENDINBLUE_PASSWORD,
+      },
+    });
+    
+  
+    const info = await transporter.sendMail({
+      from: 'imbd.dev@gmail.com',
+      to: email.email,
+      subject: 'Email Confirmation',
+      html: text,
+    });
+  
+    console.log("Message sent: " + info.messageId);
+  
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
 
@@ -350,3 +372,39 @@ app.post('/search', async function(req, res) {
     await client.close();
   }
 });
+
+app.post('/confirmEmail', async function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = process.env.uri;
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  });
+
+  const user = { username: req.body.username };
+  const confirm = { emailConfirm: true };
+
+  try {
+    await client.connect();
+    const dbo = client.db('Users');
+    await dbo.command({ ping: 1 });
+    console.log('Pinged your deployment. You successfully connected to MongoDB!');
+
+    const result = await dbo.collection('users').updateOne(user, { $set: confirm });
+
+    if (result.matchedCount > 0 && result.modifiedCount > 0) {
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch(err) {
+    console.error(err);
+    res.json({ success: false });
+  } finally {
+    await client.close();
+  }
+})

@@ -1,36 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IMBd - Movies and More</title>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="https://kit.fontawesome.com/ea918388ae.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link href="./stylesheets/style.css" type="text/css" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-  <script src="./javascripts/user.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMBd - Movies and More</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/ea918388ae.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="./stylesheets/style.css" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
-<div id="header"></div>
-<script>
-  $(function(){
-    $("#header").load("shared/header.html"); 
-    var script = document.createElement('script');
-    script.src = 'shared/header.js';
-    document.head.appendChild(script);
-  });
-</script>
+
+
+  <div id="header"></div>
+  <script>
+    $(function(){
+      $("#header").load("shared/header.html"); 
+      var script = document.createElement('script');
+      script.src = 'shared/header.js';
+      document.head.appendChild(script);
+    });
+  </script>
+
 <body>
-  <div class="bg-light border border-dark mx-auto w-50" style="margin-bottom: 40px; margin-top: 111px;">
-    
-  </div>
+
+  <main role="main">
+
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">About Us</h1>
+        <p class="lead text-muted">This website was created by three undergraduate students at Penn State as part of a course-long project to recreate a website's front-end and back-end</p> 
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <img class="card-img-top" alt="Thumbnail [100%x225]" style="display: block;" src="images/will.png">
+              <div class="card-body">
+                <h3>Will Marsh</h3>
+                <p class="card-text">Hi, my name is Will Marsh. I am a fourth year Enterprise technology Integration major with a focus in Cybersecurity. Outside of school, I am a pilot and I enjoy spending time with my dog, Barkley. Connect with me on LinkedIn: <a href="https://www.linkedin.com/in/willmarsh13/">https://www.linkedin.com/in/willmarsh13/</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <img class="card-img-top" alt="Thumbnail [100%x225]" style="display: block;" src="images/keith.png">
+              <div class="card-body">
+                <h3>Keith Charlton</h3>
+                <p class="card-text">Hi, My name is Keith Charlton. I am a third year Enterprise Technology Integration major with a focus in Business Competency. I enjoy sports, such as: soccer, golf, and (flag) football in my free time, as well as spending time with friends outside of school. Connect with me on LinkedIn: <a href="https://www.linkedin.com/in/keith-charlton-jr">https://www.linkedin.com/in/keith-charlton-jr</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <img class="card-img-top" alt="Thumbnail [100%x225]" style="display: block;" src="images/justis.png">
+              <div class="card-body">
+                <h3>Justis Taylor</h3>
+                <p class="card-text">Hi, my name is Justis Taylor. I am a fourth year Cybersecurity major with a focus in Enterprise Technology Integration. I enjoy singing in my acapella group and playing sports such as Disc Golf. Connect with me on LinkedIn: n<a href="https://www.linkedin.com/in/justis-taylor/">https://www.linkedin.com/in/justis-taylor/</a>
+                </p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <section class="jumbotron text-center" style="margin-top: 15px;">
+      <div class="container">
+        <h1 class="jumbotron-heading">About the Project</h1>
+        <p class="lead text-muted">	This website was created as part of the ETI 461 project. This project consisted of creating a database that connects to a website for the company of our choosing, IMDb. Our website is titled IMBd, and includes the following aspects similar to IMDb:
+          <ul class="list-group list-group-flush lead text-muted">
+            <li class="list-group-item" style="background-color: #eeeeee !important;">A list of movies with descriptions and actors</li>
+            <li class="list-group-item" style="background-color: #eeeeee !important;">A search bar to find specific movies, actors, or directors</li>
+            <li class="list-group-item" style="background-color: #eeeeee !important;">sSpecific actors and directors pages with awards won</li>
+            <li class="list-group-item" style="background-color: #eeeeee !important;">The ability for users to create an account and login</li>
+            <li class="list-group-item" style="background-color: #eeeeee !important;">An Admin dashboard to control roles and data</li>
+            <li class="list-group-item" style="background-color: #eeeeee !important;">A meet the team tab</li>
+            <li class="list-group-item" style="background-color: #eeeeee !important;">A contact us tab</li>
+          </ul>
+        </p> 
+      </div>
+    </section>
+
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">Source Code</h1>
+        <p class="lead text-muted">This website is an open-source website with the code on a GitHub Repository: <a href="https://github.com/kchar601/IMDB-eti461">Click here to visit the repository</a></p> 
+      </div>
+    </section>
+
+  </main>
+
 </body>
-<div id="footer" class="fixed-bottom"></div>
+
+
+<div id="footer"></div>
 <script>
   $(function(){
     $("#footer").load("shared/footer.html"); 
