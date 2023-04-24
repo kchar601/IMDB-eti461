@@ -387,8 +387,8 @@ app.post('/attemptRegister', async function (req, res) {
     await client.close();
   }
 
-  const text = `<h2>Click the link below to confirm your email address</h2>
-  <a href="http://localhost:3000/confirmEmail?user=${user.username}">Confirm Email</a>`;
+  const text = `<img src="IMDBLogo.png" alt="IMDB-Logo"><h2>Click the link below to confirm your email address</h2>
+  <a href="http://localhost:3000/emailConfirmation.html?user=${user.username}">Confirm Email</a>`;
   
   try {
     const transporter = nodemailer.createTransport({
@@ -549,3 +549,53 @@ app.post('/confirmEmail', async function(req, res) {
     await client.close();
   }
 })
+
+app.post('/deleteUser', async function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require("mongodb");
+  const uri = process.env.uri;
+  const client = new MongoClient(uri,  {
+          serverApi: {
+              version: ServerApiVersion.v1,
+              strict: true,
+              deprecationErrors: true,
+          }
+      }
+  );
+  let del = {};
+  if(req.body.id){
+    del= {id: req.body.id};
+    console.log(del);
+  } else if(req.body.username){
+    del = {username: req.body.username};
+    console.log(del);
+  } else {
+    console.log("No id or username provided");
+    res.json({success: false});
+    return;
+  }
+  async function run() { 
+    try {
+      await client.connect();
+      const dbo = client.db("Users");
+      await dbo.command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+      const result = await dbo.collection("users").deleteOne(del);
+      console.log("Delete result:", result);
+      if(result.deletedCount>0){
+        res.json({success: true});
+      } else {
+        res.json({success: false});
+      }
+    } catch(err) {
+      console.error(err);
+      res.json({success: false});
+    } finally {
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
+})
+
+
+

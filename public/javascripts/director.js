@@ -68,7 +68,7 @@ function updateDirector(){
       }
       else{
         console.log(data);
-        window.location.href = "/director.html#"+directorID;
+        window.location.reload();
       }
     });
   }

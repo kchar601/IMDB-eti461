@@ -329,3 +329,7 @@ body {
   max-width: 150px;
   max-height: 200px;
 }
+
+.red-hover:hover{
+  background-color: rgba(255, 0, 0, 0.6) !important; 
+}

@@ -103,7 +103,7 @@ function updateActor(){
       }
       else{
         console.log(data);
-        window.location.href = "/actor.html#"+actorID;
+        window.location.reload();
       }
     });
   }

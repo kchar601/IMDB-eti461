@@ -67,7 +67,7 @@ function updateMovie(){
         }
         else{
             console.log(data);
-            window.location.href = "/movie.html#"+data.id;
+            window.location.reload();
         }
     
     });

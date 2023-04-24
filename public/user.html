@@ -33,7 +33,8 @@
         <button id="account-sidebar-btn" class="btn btn-medium btn-light btn-unround selected text-start" onclick="tabSelect('account-sidebar-btn')"><i class="fa-solid fa-house me-3"></i>Account</button>
         <button id="password-sidebar-btn" class="btn btn-medium btn-light btn-unround text-start" onclick="tabSelect('password-sidebar-btn')"><i class="fa-solid fa-key me-3"></i>Password</button>
         <button id="notification-sidebar-btn" class="btn btn-medium btn-light btn-unround text-start" onclick="tabSelect('notification-sidebar-btn')"><i class="fa-solid fa-bell me-3"></i>Notifications</button>      
-        <button id="admin-link-btn" class="btn btn-medium btn-light btn-unround text-start" onclick="window.location.href='/admin.html'"><i class="fa-solid fa-gear me-3"></i>Admin Panel</button>
+        <button id="admin-link-btn" class="btn btn-medium btn-light btn-unround text-start" onclick="window.location.href='/admin.html'" style="display: none;"><i class="fa-solid fa-gear me-3"></i>Admin Panel</button>
+        <button id="delete-btn" class="btn btn-medium btn-light btn-unround text-start" onclick="tabSelect('delete-btn')"><i class="fa-solid fa-trash me-3"></i>Delete Account</button>
         <button id="logout-sidebar-btn" class="btn btn-medium btn-light btn-unround text-start" onclick="logout()"><i class="fa-solid fa-arrow-right-to-bracket me-3"></i>Logout</button>
       </div>
         <div class="content-wrapper d-flex flex-column flex-grow-1">
@@ -62,6 +63,9 @@
             <label class="text-medium mx-auto pt-5">Notify me about new features and updates<input type="checkbox" class="ms-3"></label>
             <label class="text-medium mx-auto pt-3">Receive our weekly news letter<input type="checkbox" class="ms-3"></label>
           </div>
+        <div id="delete-content" class="text-center" style="height:fit-content; display: none;">
+          <button class="btn btn-danger mx-auto my-5 text-large" onclick="deleteAccount()">Delete your IMBd Account</button>
+        </div>
       </div>
     </div>
   </div>

@@ -71,13 +71,22 @@ function showUsers(data, status) {
         $('#userList').empty();
         data.forEach(user => {
             $('#userList').append(`<li class="trending">
-            <button class="btn btn-light" style="float: right;" type="button" onclick="window.location.href=\'/user.html#` + user.id + `\'">Edit<i class="fas fa-edit ms-3"></i></button>
+            <button class="btn btn-light red-hover" style="float: right;" type="button" onclick="deleteUser(` + user.id + `)">Delete<i class="fas fa-trash ms-3"></i></button>
             <button class="li-btn" onclick="window.location.href=\"/users.html#" + ` + user.id + ` + "\"">
             <h2 class="text-start">` + user.Fname + ` ` + user.Lname + ` </h2>
             </button>
             </li>`);
     })
   }
+}
+
+function deleteUser(id) {
+    $.post('/deleteUser', {id: id}, function(data, status){
+        if (status) {
+            alert(data);
+            window.location.reload();
+        }
+    });
 }
 
 $(document).ready(function(){

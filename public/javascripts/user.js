@@ -4,18 +4,19 @@ function tabSelect(selector){
     switch(selector){
         case 'account-sidebar-btn':
             $('#account-content').show();
-            $('#password-content').hide();
-            $('#notification-content').hide();
+            $('#account-content').siblings().hide();
             break;
         case 'password-sidebar-btn':
-            $('#account-content').hide();
             $('#password-content').show();
-            $('#notification-content').hide();
+            $('#password-content').siblings().hide();
             break;
         case 'notification-sidebar-btn':
-            $('#account-content').hide();
-            $('#password-content').hide();
             $('#notification-content').show();
+            $('#notification-content').siblings().hide();
+            break;
+        case 'delete-btn':
+            $('#delete-content').show();
+            $('#delete-content').siblings().hide();
             break;
     }
 }
@@ -48,6 +49,17 @@ function checkForCookie(){
         console.log("no cookie");
         window.location.href = "login.html"; 
     }
+}
+
+function deleteAccount(){
+    $.post('/deleteUser', {"username": document.cookie.split('=')[1].split(';')[0]}, function(data){
+        if(data.success=true){
+            logout();
+        }
+        else{
+            alert("Something went wrong");
+        }
+    })
 }
 
 $(document).ready(function(){
