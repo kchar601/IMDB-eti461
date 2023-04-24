@@ -89,7 +89,15 @@ function deleteUser(id) {
     });
 }
 
+function checkRole(){
+    let role = document.cookie.split('=')[3].split(';')[0];
+    if(role!='admin'){
+        window.location.href = '/';
+    }
+}
+
 $(document).ready(function(){
+    checkRole();
     $.get('/getMovies', showMovies);
     $.get('/getActors',  showActors);
     $.get('/getDirectors', showDirectors);
