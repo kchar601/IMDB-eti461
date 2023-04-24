@@ -93,6 +93,65 @@ app.get('/getDirectors', function(req,res){
  run().catch(console.dir);
  })
 
+ app.get('/getSortedDirectors', async function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = process.env.uri;
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  }); 
+  const aggr = JSON.parse(req.query.agg);  
+  console.log('Received aggregation pipeline:', JSON.stringify(aggr));
+  try {
+    await client.connect();
+    const dbo = client.db('movies');
+    await dbo.command({ ping: 1 });
+    console.log('Pinged your deployment. You successfully connected to MongoDB!');
+    const coll = client.db('movies').collection('directors');
+    const cursor = coll.aggregate(aggr);
+    const result = await cursor.toArray();
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal server error');
+  } finally {
+    await client.close();
+  }
+});
+
+
+app.post('/updateDirector', async function(req,res){
+  res.setHeader('Content-Type', 'application/json');
+    const { MongoClient, ServerApiVersion, BSON } = require('mongodb');
+    const uri = process.env.uri;
+    const client = new MongoClient(uri, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+      },
+    });
+  
+    try {
+      await client.connect();
+      const dbo = client.db('movies');
+      await dbo.command({ ping: 1 });
+      console.log('Pinged your deployment. You successfully connected to MongoDB!');
+      const director = req.body.director;
+      const id = new BSON.Int32(req.body.id); // Convert the ID to an Int32 object
+      console.log('Updating actor with id:', id);
+      const result = await dbo.collection('directors').updateOne({ id: id }, { $set: director });
+      console.log('Update result:', result);
+      res.json(result);
+    } finally {
+      await client.close();
+    }
+})
+
  app.get('/getActors', function(req,res){
   res.setHeader('Content-Type', 'application/json');
  const { MongoClient, ServerApiVersion } = require("mongodb");
@@ -119,6 +178,60 @@ app.get('/getDirectors', function(req,res){
  }
  run().catch(console.dir);
  })
+
+app.get('/getSortedActors', async function(req,res){
+  res.setHeader('Content-Type', 'application/json');
+  const { MongoClient, ServerApiVersion } = require('mongodb');
+  const uri = process.env.uri;
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  }); 
+  const aggr = JSON.parse(req.query.agg);  
+  console.log('Received aggregation pipeline:', JSON.stringify(aggr));
+  try {
+    await client.connect();
+    const dbo = client.db('movies');
+    await dbo.command({ ping: 1 });
+    console.log('Pinged your deployment. You successfully connected to MongoDB!');
+    const coll = client.db('movies').collection('actors');
+    const cursor = coll.aggregate(aggr);
+    const result = await cursor.toArray();
+    res.json(result);
+  } finally {
+    await client.close();
+  }
+})
+
+app.get('/getAwards', async function(req,res){
+  res.setHeader('Content-Type', 'application/json');
+ const { MongoClient, ServerApiVersion } = require("mongodb");
+ const uri = process.env.uri;
+ const client = new MongoClient(uri,  {
+         serverApi: {
+             version: ServerApiVersion.v1,
+             strict: true,
+             deprecationErrors: true,
+         }
+     }
+ );
+ async function run() {
+   try {
+     await client.connect();
+     const dbo = client.db("movies");
+     await dbo.command({ ping: 1 });
+     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+     const items = await dbo.collection("actorAwards").find({}).toArray();
+     res.json(items);
+   } finally {
+     await client.close();
+   }
+ }
+ run().catch(console.dir);
+})
 
 app.get('/getUser', function(req,res){
   res.setHeader('Content-Type', 'application/json');
@@ -337,6 +450,34 @@ app.post('/updateMovie', async function(req, res) {
     
   });
 
+  app.post('/updateActor', async function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    const { MongoClient, ServerApiVersion, BSON } = require('mongodb');
+    const uri = process.env.uri;
+    const client = new MongoClient(uri, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+      },
+    });
+  
+    try {
+      await client.connect();
+      const dbo = client.db('movies');
+      await dbo.command({ ping: 1 });
+      console.log('Pinged your deployment. You successfully connected to MongoDB!');
+      const actor = req.body.actor;
+      const id = new BSON.Int32(req.body.id); // Convert the ID to an Int32 object
+      console.log('Updating actor with id:', id);
+      const result = await dbo.collection('actors').updateOne({ id: id }, { $set: actor });
+      console.log('Update result:', result);
+      res.json(result);
+    } finally {
+      await client.close();
+    }
+  });
+  
 
 app.post('/search', async function(req, res) {
   res.setHeader('Content-Type', 'application/json');

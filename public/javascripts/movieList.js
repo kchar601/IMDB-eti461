@@ -75,5 +75,9 @@ function getSortStyle() {
     $.when(directorList, actorList).done(function () {
       getSortStyle();
     });
+    const urlParams = new URLSearchParams(window.location.search).get('sortBy');
+    if (urlParams) {
+      selected(urlParams);
+    }
   });
   
