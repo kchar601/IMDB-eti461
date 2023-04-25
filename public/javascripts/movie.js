@@ -94,7 +94,7 @@ $(document).ready(function(){
             console.log("user");
             $("#editMovie").hide();
             $("#footer").addClass("fixed-bottom");
-            $.get("/getMovies", sortMovie);
+            $.get("/getMovies", showMovie);
         }
     }
 });
