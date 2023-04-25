@@ -92,9 +92,14 @@ function deleteUser(id) {
 }
 
 function checkRole(){
-    let role = document.cookie.split('=')[3].split(';')[0];
-    if(role!='admin'){
+    if(document.cookie=""){
         window.location.href = '/';
+    }
+    else{
+        let role = document.cookie.split('=')[3].split(';')[0];
+        if(role!='admin'){
+            window.location.href = '/';
+        }
     }
 }
 
