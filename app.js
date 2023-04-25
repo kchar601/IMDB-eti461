@@ -387,7 +387,7 @@ app.post('/attemptRegister', async function (req, res) {
     await client.close();
   }
 
-  const text = `<img src="https://imbd.dev/images/IMDBLogo.png" alt="IMDB-Logo"><h2>Click the link below to confirm your email address</h2>
+  const text = `<img src="https://imbd.dev/images/IMDBLogo.png" alt="IMDB-Logo" style="width:100px;"><h2>Click the link below to confirm your email address</h2>
   <a href="http://localhost:3000/emailConfirmation.html?user=${user.username}">Confirm Email</a>`;
   
   try {
