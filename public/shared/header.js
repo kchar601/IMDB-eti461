@@ -13,6 +13,5 @@ function checkForCookie(){
     }
 }
 
-$(document).ready(function(){
-    checkForCookie();
-});
+
+checkForCookie();

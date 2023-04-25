@@ -72,7 +72,7 @@ function showUsers(data, status) {
         data.forEach(user => {
             if(user.role !== 'admin'){
             $('#userList').append(`<li class="trending">
-            <button class="btn btn-light red-hover" style="float: right;" type="button" onclick="deleteUser(` + user.id + `)">Delete<i class="fas fa-trash ms-3"></i></button>
+            <button class="btn btn-light red-hover" style="float: right;" type="button" onclick="deleteUser(` + user.username + `)">Delete<i class="fas fa-trash ms-3"></i></button>
             <button class="li-btn" onclick="window.location.href=\"/users.html#" + ` + user.id + ` + "\"">
             <h2 class="text-start">` + user.Fname + ` ` + user.Lname + ` </h2>
             </button>
@@ -83,7 +83,7 @@ function showUsers(data, status) {
 }
 
 function deleteUser(id) {
-    $.post('/deleteUser', {id: id}, function(data, status){
+    $.post('/deleteUser', {username: id}, function(data, status){
         if (status) {
             alert(data);
             window.location.reload();
@@ -92,16 +92,18 @@ function deleteUser(id) {
 }
 
 function checkRole(){
-    if(document.cookie=""){
-        window.location.href = '/';
-    }
-    else{
+    try {
         let role = document.cookie.split('=')[3].split(';')[0];
         if(role!='admin'){
             window.location.href = '/';
         }
+    } catch (error) {
+        console.log(error);
+        window.location.href = '/';
     }
+       
 }
+
 
 $(document).ready(function(){
     checkRole();
