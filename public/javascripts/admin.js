@@ -70,12 +70,13 @@ function showUsers(data, status) {
     if (status) {
         $('#userList').empty();
         data.forEach(user => {
+            if(user.role=="user"){
             $('#userList').append(`<li class="trending">
             <button class="btn btn-light red-hover" style="float: right;" type="button" onclick="deleteUser(` + user.id + `)">Delete<i class="fas fa-trash ms-3"></i></button>
             <button class="li-btn" onclick="window.location.href=\"/users.html#" + ` + user.id + ` + "\"">
             <h2 class="text-start">` + user.Fname + ` ` + user.Lname + ` </h2>
             </button>
-            </li>`);
+            </li>`);}
     })
   }
 }
