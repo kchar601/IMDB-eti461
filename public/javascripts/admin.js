@@ -72,7 +72,7 @@ function showUsers(data, status) {
         data.forEach(user => {
             if(user.role !== 'admin'){
             $('#userList').append(`<li class="trending">
-            <button class="btn btn-light red-hover" style="float: right;" type="button" onclick="deleteUser(` + user.username + `)">Delete<i class="fas fa-trash ms-3"></i></button>
+            <button class="btn btn-light red-hover" style="float: right;" type="button" onclick="deleteUser('` + user.username + `')">Delete<i class="fas fa-trash ms-3"></i></button>
             <button class="li-btn" onclick="window.location.href=\"/users.html#" + ` + user.id + ` + "\"">
             <h2 class="text-start">` + user.Fname + ` ` + user.Lname + ` </h2>
             </button>
@@ -82,8 +82,15 @@ function showUsers(data, status) {
   }
 }
 
-function deleteUser(id) {
-    $.post('/deleteUser', {username: id}, function(data, status){
+function logout(){
+    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    document.cookie = "pass=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+    window.location.href = "index.html";
+}
+
+function deleteUser(username) {
+    $.post('/deleteUser', {username: username}, function(data, status){
         if (status) {
             alert(data);
             window.location.reload();
